@@ -130,6 +130,47 @@ app.delete( "/app/user/delete/item", (req, res) => {
   res.status(200).json( { "message" : info.changes + " record deleted: ID " + req.body.userId + " (200)" } );
 } );
 
+//////////////////////////////////////////////////////////// API FOR ORDERS
+
+// CREATE new order from cart (HTTP method POST)
+// At endpoint /app/user/new/order
+app.post( "/app/user/new/order", ( req, res ) => {
+  const readCart = db.prepare(
+    `SELECT * FROM cartInfo
+    WHERE userId = ?`
+  );
+  const cart = readCart.all( req.body.userId );
+  const createOrder = db.prepare(
+    `INSERT INTO orderInfo ( userId, itemId, quantity )
+    VALUES ( ?, ?, ? );`
+  );
+  cart.forEach( ( cartItem ) => {
+    const info = createOrder.run( cartItem.userId, cartItem.itemId, cartItem.quantity );
+    res.status(201).json( { "message" : info.changes + " record created: ID " + info.lastInsertRowid + " (201)" } );
+  } );
+} );
+
+// READ list of all orders for current user (HTTP method GET)
+// At endpoint /app/user/orders
+app.get( "/app/user/orders", ( req, res ) => {
+  const stmt = db.prepare(
+    `SELECT * FROM orderInfo
+    WHERE userId = ?`
+  );
+  const orders = stmt.all( req.body.userId );
+  res.status(200).send( JSON.stringify( orders, null, "\t" ) );
+} );
+
+// DELETE an order (HTTP method DELETE)
+// At endpoint /app/user/delete/order
+app.delete( "/app/user/delete/order", (req, res) => {
+  const stmt = db.prepare(
+    `DELETE FROM orderInfo WHERE orderId = ?`
+  );
+  const info = stmt.run( req.body.orderId );
+  res.status(200).json( { "message" : info.changes + " record deleted: ID " + req.body.orderId + " (200)" } );
+} );
+
 //////////////////////////////////////////////////////////// DEFAULT RESPONSE
 
 app.use( function( req, res ){

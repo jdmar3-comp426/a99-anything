@@ -117,6 +117,40 @@ if ( cartInfoExists === undefined ) {
 
 }
 
+//////////////////////////////////////////////////////////// ORDER TABLE
+
+// Determine whether order table has been initialized
+// If uninitialized then initialize table
+
+let orderInfoExists = db.prepare(
+  `SELECT name
+  FROM sqlite_master
+  WHERE type='table' and name='orderInfo';`
+).get();
+
+if ( orderInfoExists === undefined ) {
+
+  console.log( 'Did not find table for order information, will create' );
+  
+  // Create table for order information
+  db.exec(
+    `CREATE TABLE orderInfo (
+      orderId INTEGER PRIMARY KEY,
+      userId REFERENCES userInfo( userId ),
+      itemId REFERENCES itemInfo( itemId ),
+      quantity INTEGER NOT NULL, /* CHECK must be greater than 0 */
+      timePlaced DEFAULT CURRENT_TIMESTAMP
+    );`
+  );
+
+  console.log( 'Created table for order information, table currently empty' );
+
+} else {
+
+  console.log( "There exists a table for order information" );
+
+}
+
 //////////////////////////////////////////////////////////// EXPORT
 
 // Export all of the above as a module so that we can use it elsewhere
