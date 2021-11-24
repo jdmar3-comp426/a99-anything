@@ -84,6 +84,52 @@ app.delete( "/app/delete/user", (req, res) => {
   res.status(200).json( { "message" : info.changes + " record deleted: ID " + req.body.userId + " (200)" } );
 } );
 
+//////////////////////////////////////////////////////////// API FOR CART ITEMS
+
+// CREATE new cart item (HTTP method POST)
+// At endpoint /app/user/new/item
+app.post( "/app/user/new/item", ( req, res ) => {
+  const stmt = db.prepare(
+    `INSERT INTO cartInfo ( userId, itemId, quantity )
+    VALUES ( ?, ?, ? );`
+  );
+  const info = stmt.run( req.body.userId, req.body.itemId, req.body.quantity );
+  res.status(201).json( { "message" : info.changes + " record created: ID " + info.lastInsertRowid + " (201)" } );
+} );
+
+// READ list of all cart items for current user (HTTP method GET)
+// At endpoint /app/user/cart
+app.get( "/app/user/cart", ( req, res ) => {
+  const stmt = db.prepare(
+    `SELECT * FROM cartInfo
+    WHERE userId = ?`
+  );
+  const cart = stmt.all( req.body.userId );
+  res.status(200).send( JSON.stringify( cart, null, "\t" ) );
+} );
+
+// UPDATE a cart item (HTTP method PATCH)
+// At endpoint /app/user/update/item
+app.patch( "/app/user/update/item", ( req, res ) => {
+  const stmt = db.prepare(
+    `UPDATE cartInfo
+    SET quantity = COALESCE( ?, quantity )
+    WHERE userId = ? AND itemId = ?`
+  );
+  const info = stmt.run( req.body.quantity, req.body.userId, req.body.itemId );
+  res.status(200).json( { "message" : info.changes + " record updated: ID " + req.body.userId + " (200)" } );
+} );
+
+// DELETE a cart item (HTTP method DELETE)
+// At endpoint /app/user/delete/item
+app.delete( "/app/user/delete/item", (req, res) => {
+  const stmt = db.prepare(
+    `DELETE FROM cartInfo WHERE userId = ? AND itemId = ?`
+  );
+  const info = stmt.run( req.body.userId, req.body.itemId );
+  res.status(200).json( { "message" : info.changes + " record deleted: ID " + req.body.userId + " (200)" } );
+} );
+
 //////////////////////////////////////////////////////////// DEFAULT RESPONSE
 
 app.use( function( req, res ){

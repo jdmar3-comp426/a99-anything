@@ -85,6 +85,38 @@ if ( itemInfoExists === undefined ) {
 
 }
 
+//////////////////////////////////////////////////////////// CART TABLE
+
+// Determine whether cart table has been initialized
+// If uninitialized then initialize table
+
+let cartInfoExists = db.prepare(
+  `SELECT name
+  FROM sqlite_master
+  WHERE type='table' and name='cartInfo';`
+).get();
+
+if ( cartInfoExists === undefined ) {
+
+  console.log( 'Did not find table for cart information, will create' );
+  
+  // Create table for cart information
+  db.exec(
+    `CREATE TABLE cartInfo (
+      userId REFERENCES userInfo( userId ),
+      itemId REFERENCES itemInfo( itemId ),
+      quantity INTEGER NOT NULL /* CHECK must be greater than 0 */
+    );`
+  );
+
+  console.log( 'Created table for cart information, table currently empty' );
+
+} else {
+
+  console.log( "There exists a table for cart information" );
+
+}
+
 //////////////////////////////////////////////////////////// EXPORT
 
 // Export all of the above as a module so that we can use it elsewhere
