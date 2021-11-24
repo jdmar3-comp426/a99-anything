@@ -43,6 +43,48 @@ if ( userInfoExists === undefined ) {
 
 }
 
+//////////////////////////////////////////////////////////// MENU ITEM TABLE
+
+// Determine whether menu item table has been initialized
+// If uninitialized then initialize table
+
+let itemInfoExists = db.prepare(
+  `SELECT name
+  FROM sqlite_master
+  WHERE type='table' and name='itemInfo';`
+).get();
+
+if ( itemInfoExists === undefined ) {
+
+  console.log( 'Did not find table for menu item information, will create' );
+  
+  // Create table for cart information
+  db.exec(
+    `CREATE TABLE itemInfo (
+      itemId INTEGER PRIMARY KEY,
+      itemName TEXT UNIQUE, /* CHECK cannot be empty string */
+      price REAL NOT NULL, /* CHECK must be greater than 0, have up to 2 decimal places */
+      prepTime INTEGER NOT NULL, /* CHECK must be greater than 0 */ /* IN MINUTES */
+      isVegetarian INTEGER NOT NULL /* CHECK must be either 0 or 1 */
+    );`
+  );
+
+  // Records for all menu items
+  db.exec(
+    `INSERT INTO itemInfo ( itemName, price, prepTime, isVegetarian )
+    VALUES
+    ( 'ITEM 1.0', 1.00, 1, 0 ),
+    ( 'ITEM 1.1', 1.00, 1, 1 );`
+  );
+
+  console.log( 'Created table for menu item information' );
+
+} else {
+
+  console.log( "There exists a table for menu item information" );
+
+}
+
 //////////////////////////////////////////////////////////// EXPORT
 
 // Export all of the above as a module so that we can use it elsewhere
