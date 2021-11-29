@@ -30,8 +30,8 @@ if ( userInfoExists === undefined ) {
   db.exec(
     `CREATE TABLE userInfo (
       userId INTEGER PRIMARY KEY,
-      username TEXT NOT NULL UNIQUE, /* CHECK cannot be empty string */
-      pass TEXT NOT NULL /* CHECK cannot be empty string */
+      username TEXT NOT NULL UNIQUE CHECK ( username != '' ),
+      pass TEXT NOT NULL CHECK ( pass != '' )
     );`
   );
 
@@ -62,10 +62,10 @@ if ( itemInfoExists === undefined ) {
   db.exec(
     `CREATE TABLE itemInfo (
       itemId INTEGER PRIMARY KEY,
-      itemName TEXT UNIQUE, /* CHECK cannot be empty string */
-      price REAL NOT NULL, /* CHECK must be greater than 0, have up to 2 decimal places */
-      prepTime INTEGER NOT NULL, /* CHECK must be greater than 0 */ /* IN MINUTES */
-      isVegetarian INTEGER NOT NULL /* CHECK must be either 0 or 1 */
+      itemName TEXT NOT NULL UNIQUE CHECK ( itemName != '' ),
+      price REAL NOT NULL CHECK ( price > 0 ),
+      prepTime INTEGER NOT NULL CHECK ( prepTime > 0 ), /* prepTime is in minutes */
+      isVegetarian INTEGER NOT NULL CHECK ( ( isVegetarian == 0 ) OR ( isVegetarian == 1 ) )
     );`
   );
 
@@ -81,9 +81,11 @@ if ( itemInfoExists === undefined ) {
 
 } else {
 
-  console.log( "There exists a table for menu item information" );
+  console.log( 'There exists a table for menu item information' );
 
 }
+
+console.log( db.prepare( 'SELECT * FROM itemInfo' ).all() );
 
 //////////////////////////////////////////////////////////// CART TABLE
 
@@ -103,9 +105,9 @@ if ( cartInfoExists === undefined ) {
   // Create table for cart information
   db.exec(
     `CREATE TABLE cartInfo (
-      userId REFERENCES userInfo( userId ),
-      itemId REFERENCES itemInfo( itemId ),
-      quantity INTEGER NOT NULL /* CHECK must be greater than 0 */
+      userId NOT NULL REFERENCES userInfo( userId ),
+      itemId NOT NULL REFERENCES itemInfo( itemId ),
+      quantity INTEGER NOT NULL CHECK ( quantity > 0 )
     );`
   );
 
@@ -113,7 +115,7 @@ if ( cartInfoExists === undefined ) {
 
 } else {
 
-  console.log( "There exists a table for cart information" );
+  console.log( 'There exists a table for cart information' );
 
 }
 
@@ -136,9 +138,9 @@ if ( orderInfoExists === undefined ) {
   db.exec(
     `CREATE TABLE orderInfo (
       orderId INTEGER PRIMARY KEY,
-      userId REFERENCES userInfo( userId ),
-      itemId REFERENCES itemInfo( itemId ),
-      quantity INTEGER NOT NULL, /* CHECK must be greater than 0 */
+      userId NOT NULL REFERENCES userInfo( userId ),
+      itemId NOT NULL REFERENCES itemInfo( itemId ),
+      quantity INTEGER NOT NULL CHECK ( quantity > 0 ),
       timePlaced DEFAULT CURRENT_TIMESTAMP
     );`
   );
@@ -147,7 +149,7 @@ if ( orderInfoExists === undefined ) {
 
 } else {
 
-  console.log( "There exists a table for order information" );
+  console.log( 'There exists a table for order information' );
 
 }
 
