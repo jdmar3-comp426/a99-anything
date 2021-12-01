@@ -171,6 +171,18 @@ app.delete( "/app/user/delete/order", (req, res) => {
   res.status(200).json( { "message" : info.changes + " record deleted: ID " + req.body.orderId + " (200)" } );
 } );
 
+//////////////////////////////////////////////////////////// API FOR ITEMS
+
+// READ all items that match the search query (HTTP method GET)
+// At endpoint /app/item/
+app.get( "/app/item", ( req, res ) => {
+  const stmt = db.prepare(
+    `SELECT * FROM itemInfo WHERE like( ?, itemName )`
+  );
+  const item = stmt.all( '%' + req.body.search + '%' );
+  res.status(200).send( JSON.stringify( item, null, "\t" ) );
+} );
+
 //////////////////////////////////////////////////////////// DEFAULT RESPONSE
 
 app.use( function( req, res ){

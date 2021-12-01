@@ -73,8 +73,18 @@ if ( itemInfoExists === undefined ) {
   db.exec(
     `INSERT INTO itemInfo ( itemName, price, prepTime, isVegetarian )
     VALUES
-    ( 'ITEM 1.0', 1.00, 1, 0 ),
-    ( 'ITEM 1.1', 1.00, 1, 1 );`
+    ( 'Almond milk', 1.00, 1, 1 ),
+    ( 'Apple', 1.00, 1, 1 ),
+    ( 'Apple pie', 1.00, 1, 0 ),
+    ( 'Avocado', 1.00, 1, 1 ),
+    ( 'Bagel', 1.00, 1, 0 ),
+    ( 'Blueberry', 1.00, 1, 1 ),
+    ( 'Blueberry pie', 1.00, 1, 0 ),
+    ( 'Cheese', 1.00, 1, 0 ),
+    ( 'Cheesecake', 1.00, 1, 0 ),
+    ( 'Chicken pot pie', 1.00, 1, 0 ),
+    ( 'Chocolate', 1.00, 1, 1 ),
+    ( 'Chocolate milk', 1.00, 1, 0 );`
   );
 
   console.log( 'Created table for menu item information' );
