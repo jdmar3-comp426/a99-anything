@@ -30,8 +30,8 @@ if ( userInfoExists === undefined ) {
   db.exec(
     `CREATE TABLE userInfo (
       userId INTEGER PRIMARY KEY,
-      username TEXT NOT NULL UNIQUE CHECK ( username != '' ),
-      pass TEXT NOT NULL CHECK ( pass != '' )
+      username TEXT NOT NULL UNIQUE, /* Implement client-side check for empty field */
+      pass TEXT NOT NULL /* Implement client-side check for empty field */
     );`
   );
 
@@ -58,7 +58,7 @@ if ( itemInfoExists === undefined ) {
 
   console.log( 'Did not find table for menu item information, will create' );
   
-  // Create table for cart information
+  // Create table for menu item information
   db.exec(
     `CREATE TABLE itemInfo (
       itemId INTEGER PRIMARY KEY,

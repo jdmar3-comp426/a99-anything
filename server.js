@@ -47,7 +47,15 @@ app.post( "/app/new/user", ( req, res ) => {
     const info = stmt.run( req.body.username, md5( req.body.pass ) );
     res.status(201).json( { "message" : info.changes + " record created: ID " + info.lastInsertRowid + " (201)" } );
   } catch( error ) {
-    res.json( { "message" : error.name + ": " + error.message } );
+    if( error.name === "SqliteError" ) {
+      switch( error.message ) {
+          case "UNIQUE constraint failed: userInfo.username":
+            res.json( { "message": "Username taken, try another username" } );
+            break;
+          default:
+            res.json( { "message" : error.message } );
+      }
+    }
   }
 } );
 

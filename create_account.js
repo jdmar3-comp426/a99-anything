@@ -18,14 +18,14 @@ window.addEventListener( "load", function() {
 
     // Message for successful data submission
     sendRequest.addEventListener( "load", function( event ) {
-      alert( "Submission successful" );
-      alert( sendRequest.response );
+      if( sendRequest.status != 201 ) {
+        alert( sendRequest.response );
+      }
     } );
 
     // Message for error with data submission
     sendRequest.addEventListener( "error", function( event ) {
       alert( "Submission unsuccessful, please try again" );
-      alert( sendRequest.response );
     } );
 
   }
