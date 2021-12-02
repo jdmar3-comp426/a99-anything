@@ -10,9 +10,15 @@ var db = require( "./database.js" );
 // Require md5 module
 var md5 = require( "md5" );
 
+// Require CORS module
+const cors = require("cors");
+
 // Have Express use its built-in body parser
 app.use( express.urlencoded( { extended: true } ) );
 app.use( express.json() );
+
+// Make Express use CORS
+app.use(cors());
 
 // Set server port
 const port = 3000;
@@ -37,8 +43,12 @@ app.post( "/app/new/user", ( req, res ) => {
     `INSERT INTO userInfo ( username, pass )
     VALUES ( ?, ? );`
   );
-  const info = stmt.run( req.body.username, md5( req.body.pass ) );
-  res.status(201).json( { "message" : info.changes + " record created: ID " + info.lastInsertRowid + " (201)" } );
+  try {
+    const info = stmt.run( req.body.username, md5( req.body.pass ) );
+    res.status(201).json( { "message" : info.changes + " record created: ID " + info.lastInsertRowid + " (201)" } );
+  } catch( error ) {
+    res.json( { "message" : error.name + ": " + error.message } );
+  }
 } );
 
 // READ list of all users (HTTP method GET)
