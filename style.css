@@ -1,0 +1,17 @@
+* {
+  font-family: monospace;
+  text-align: center;
+}
+
+.navigation {
+  margin: 3em 0;
+}
+
+label, input {
+  display: block;
+  margin: auto;
+}
+
+a {
+  color: black;
+}
