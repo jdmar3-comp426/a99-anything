@@ -50,10 +50,10 @@ app.post( "/app/new/user", ( req, res ) => {
     if( error.name === "SqliteError" ) {
       switch( error.message ) {
           case "UNIQUE constraint failed: userInfo.username":
-            res.json( { "message": "Username taken, try another username" } );
+            res.status(409).json( { "message": error.name + ": " + error.message } );
             break;
           default:
-            res.json( { "message" : error.message } );
+            res.status(404).json( { "message": error.name + ": " + error.message } );
       }
     }
   }
@@ -66,18 +66,37 @@ app.get( "/app/users", ( req, res ) => {
     `SELECT * FROM userInfo`
   );
   const userList = stmt.all();
-  //res.status(200).json( userList );
   res.status(200).send( JSON.stringify( userList, null, "\t" ) );
 } );
 
-// READ a single user (HTTP method GET)
-// At endpoint /app/user/
-app.get( "/app/user", ( req, res ) => {
+// READ a single user (HTTP method GET) with specified userId
+// At endpoint /app/user/userId/:userId
+app.get( "/app/user/userId/:userId", ( req, res ) => {
   const stmt = db.prepare(
     `SELECT * FROM userInfo WHERE userId = ?`
   );
-  const user = stmt.get( req.body.userId );
-  res.status(200).send( JSON.stringify( user, null, "\t" ) );
+  const user = stmt.get( req.params.userId );
+  if( user === undefined ) {
+    res.status(404);
+  } else {
+    res.status(200);
+  }
+  res.send(user);
+} );
+
+// READ a single user (HTTP method GET) with specified username and password
+// At endpoint /app/user/:username/:pass
+app.get( "/app/user/:username/:pass", ( req, res ) => {
+  const stmt = db.prepare(
+    `SELECT * FROM userInfo WHERE username = ? AND pass = ?`
+  );
+  const user = stmt.get( req.params.username, md5( req.params.pass ) );
+  if( user === undefined ) {
+    res.status(404);
+  } else {
+    res.status(200);
+  }
+  res.send(user);
 } );
 
 // UPDATE a single user (HTTP method PATCH)

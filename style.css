@@ -7,11 +7,15 @@
   margin: 3em 0;
 }
 
+a {
+  color: black;
+}
+
 label, input {
   display: block;
   margin: auto;
 }
 
-a {
-  color: black;
+h1 {
+  margin-top: 2em;
 }
