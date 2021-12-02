@@ -81,7 +81,7 @@ app.get( "/app/user/userId/:userId", ( req, res ) => {
   } else {
     res.status(200);
   }
-  res.send(user);
+  res.send( JSON.stringify( user, null, "\t" ) );
 } );
 
 // READ a single user (HTTP method GET) with specified username and password
@@ -96,7 +96,7 @@ app.get( "/app/user/:username/:pass", ( req, res ) => {
   } else {
     res.status(200);
   }
-  res.send(user);
+  res.json(user.userId);
 } );
 
 // UPDATE a single user (HTTP method PATCH)

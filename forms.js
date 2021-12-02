@@ -1,3 +1,9 @@
+////////////////////////////////////////////////////////////// SETUP
+
+// Id of current user signed in
+// 0 indicates no user is signed in
+var currentUserId = 0;
+
 window.addEventListener( "load", function() {
 
   //////////////////////////////////////////////////////////// CREATE ACCOUNT
@@ -64,6 +70,8 @@ window.addEventListener( "load", function() {
     sendRequest.addEventListener( "load", function( event ) {
       if( sendRequest.status === 200 ) {
         alert( "Valid username / password" );
+        currentUserId = sendRequest.response;
+        alert( "currentUserId: " + currentUserId );
       } else if( sendRequest.status === 404 ) {
         alert( "Invalid username / password, please try again" );
       }
