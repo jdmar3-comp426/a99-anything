@@ -30,8 +30,8 @@ if ( userInfoExists === undefined ) {
   db.exec(
     `CREATE TABLE userInfo (
       userId INTEGER PRIMARY KEY,
-      username TEXT NOT NULL UNIQUE, /* Implement client-side check for empty field */
-      pass TEXT NOT NULL /* Implement client-side check for empty field */
+      username TEXT NOT NULL UNIQUE,
+      pass TEXT NOT NULL
     );`
   );
 
