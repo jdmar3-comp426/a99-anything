@@ -1,14 +1,14 @@
 window.addEventListener( "load", function() {
 
   // Access the HTML form element
-  const form = document.getElementById( "create-account" );
+  const createAccountForm = document.getElementById( "create-account" );
 
-  function sendData() {
+  function sendCreateAccountData() {
 
     const sendRequest = new XMLHttpRequest();
 
     // Bind FormData object and form element
-    const createAccountInfo = new URLSearchParams( new FormData( form ) );
+    const createAccountInfo = new URLSearchParams( new FormData( createAccountForm ) );
 
     // Set up request
     sendRequest.open( "POST", "http://localhost:3000/app/new/user" );
@@ -31,9 +31,9 @@ window.addEventListener( "load", function() {
   }
 
   // Take over submit event of form element
-  form.addEventListener( "submit", function( event ) {
+  createAccountForm.addEventListener( "submit", function( event ) {
     event.preventDefault();
-    sendData();
+    sendCreateAccountData();
   } );
 
 } );
