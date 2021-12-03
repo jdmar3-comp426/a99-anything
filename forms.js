@@ -64,7 +64,7 @@ window.addEventListener( "load", function() {
     sendRequest.addEventListener( "load", function( event ) {
       if( sendRequest.status === 200 ) {
         alert( "Valid username / password" );
-        localStorage.setItem( "currentUserId", sendRequest.response );
+        localStorage.setItem( "currentUserId", JSON.parse( sendRequest.response ).userId );
         alert( "currentUserId: " + localStorage.getItem( "currentUserId" ) );
       } else if( sendRequest.status === 404 ) {
         alert( "Invalid username / password, please try again" );
