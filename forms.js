@@ -173,9 +173,65 @@ window.addEventListener( "load", function() {
 
   //////////////////////////////////////////////////////////// ADD / UPDATE CART ITEM
 
+  ////////////////////////////// ADD CART ITEM
+
+  function addCartItem( changeCartInfo ) {
+
+    const newItemRequest = new XMLHttpRequest();
+  
+    // Set up request
+    newItemRequest.open( "POST", "http://localhost:3000/app/user/new/item" );
+  
+    // Send request with data
+    newItemRequest.send( changeCartInfo );
+  
+    // Successful data submission
+    newItemRequest.addEventListener( "load", function( event ) {
+      if( newItemRequest.status == 201 ) {
+        alert( "Cart item added" );
+      }
+    } );
+  
+    // Error with data submission
+    newItemRequest.addEventListener( "error", function( event ) {
+      alert( "Submission unsuccessful, please try again" );
+    } );
+
+  }
+
+  ////////////////////////////// UPDATE CART ITEM
+
+  function updateCartItem( changeCartInfo ) {
+
+    const updateItemRequest = new XMLHttpRequest();
+  
+    // Set up request
+    changeCartInfo.set( "quantity", changeCartInfo.get( "quantity" ) );
+    updateItemRequest.open( "PATCH", "http://localhost:3000/app/user/update/item" );
+  
+    // Send request with data
+    updateItemRequest.send( changeCartInfo );
+  
+    // Successful data submission
+    updateItemRequest.addEventListener( "load", function( event ) {
+      if( updateItemRequest.status == 200 ) {
+        alert( "Cart item updated" );
+      }
+      return;
+    } );
+  
+    // Error with data submission
+    updateItemRequest.addEventListener( "error", function( event ) {
+      alert( "Submission unsuccessful, please try again" );
+      return;
+    } );
+
+  }
+
+  ////////////////////////////// CHANGE CART
+
   // Access the HTML form element
-  // const changeCartForm = document.forms["change-cart"];
-  const itemForms = document.getElementsByClassName( "add-to-cart" );
+  const itemForms = document.getElementsByClassName( "change-cart" );
 
   function changeCart( id ) {
 
@@ -210,56 +266,9 @@ window.addEventListener( "load", function() {
         } );
 
         if( existingCartItem === null ) {
-
-          // Create new cart item
-
-          const newItemRequest = new XMLHttpRequest();
-        
-          // Set up request
-          newItemRequest.open( "POST", "http://localhost:3000/app/user/new/item" );
-        
-          // Send request with data
-          newItemRequest.send( changeCartInfo );
-        
-          // Successful data submission
-          newItemRequest.addEventListener( "load", function( event ) {
-            if( newItemRequest.status == 201 ) {
-              alert( "Cart item added" );
-            }
-          } );
-        
-          // Error with data submission
-          newItemRequest.addEventListener( "error", function( event ) {
-            alert( "Submission unsuccessful, please try again" );
-          } );
-
+          addCartItem( changeCartInfo );
         } else {
-
-          // Update existing cart item
-
-          const updateItemRequest = new XMLHttpRequest();
-        
-          // Set up request
-          changeCartInfo.set( "quantity", Number( existingCartItem.quantity ) + Number( changeCartInfo.get( "quantity" ) ) );
-          updateItemRequest.open( "PATCH", "http://localhost:3000/app/user/update/item" );
-        
-          // Send request with data
-          updateItemRequest.send( changeCartInfo );
-        
-          // Successful data submission
-          updateItemRequest.addEventListener( "load", function( event ) {
-            if( updateItemRequest.status == 200 ) {
-              alert( "Cart item updated" );
-            }
-            return;
-          } );
-        
-          // Error with data submission
-          updateItemRequest.addEventListener( "error", function( event ) {
-            alert( "Submission unsuccessful, please try again" );
-            return;
-          } );
-
+          updateCartItem( changeCartInfo );
         }
 
       } else if( getCartRequest.status === 404 ) {
