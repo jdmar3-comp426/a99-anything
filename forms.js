@@ -216,6 +216,49 @@ window.addEventListener( "load", function() {
     } );
   }
 
+  //////////////////////////////////////////////////////////// VIEW CART ITEMS
+
+  // Access the HTML form element
+  const viewCartForm = document.forms["view-cart"];
+
+  function viewCart() {
+
+    const sendRequest = new XMLHttpRequest();
+
+    // Set up request
+    if( localStorage.getItem( "currentUserId" ) == 0 ) {
+      alert( "Please sign in for cart and ordering functionality" );
+      return;
+    }
+
+    // Set up request
+    sendRequest.open( "GET", "http://localhost:3000/app/cart/" + localStorage.getItem( "currentUserId" ) );
+
+    // Send request
+    sendRequest.send();
+
+    // Successful data submission
+    sendRequest.addEventListener( "load", function( event ) {
+      if( sendRequest.status === 200 ) {
+        alert( sendRequest.response );
+      } else if( sendRequest.status === 404 ) {
+        alert( "Invalid request, please try again" );
+      }
+    } );
+
+    // Error with data submission
+    sendRequest.addEventListener( "error", function( event ) {
+      alert( "Submission unsuccessful, please try again" );
+    } );
+
+  }
+
+  // Take over submit event of form element
+  viewCartForm.addEventListener( "submit", function( event ) {
+    event.preventDefault();
+    viewCart();
+  } );
+
   //////////////////////////////////////////////////////////// PLACE ORDER
 
   // Access the HTML form element

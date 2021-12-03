@@ -70,8 +70,8 @@ app.get( "/app/users", ( req, res ) => {
 } );
 
 // READ a single user (HTTP method GET) with specified userId
-// At endpoint /app/user/userId/:userId
-app.get( "/app/user/userId/:userId", ( req, res ) => {
+// At endpoint /app/user/:userId
+app.get( "/app/user/:userId", ( req, res ) => {
   const stmt = db.prepare(
     `SELECT * FROM userInfo WHERE userId = ?`
   );
@@ -141,13 +141,17 @@ app.post( "/app/user/new/item", ( req, res ) => {
 
 // READ list of all cart items for current user (HTTP method GET)
 // At endpoint /app/user/cart
-app.get( "/app/user/cart", ( req, res ) => {
+app.get( "/app/cart/:userId", ( req, res ) => {
   const stmt = db.prepare(
-    `SELECT * FROM cartInfo
-    WHERE userId = ?`
+    `SELECT * FROM cartInfo WHERE userId = ?`
   );
-  const cart = stmt.all( req.body.userId );
-  res.status(200).send( JSON.stringify( cart, null, "\t" ) );
+  const cart = stmt.all( req.params.userId );
+  if( cart === undefined ) {
+    res.status(404);
+  } else {
+    res.status(200);
+  }
+  res.json(cart);
 } );
 
 // UPDATE a cart item (HTTP method PATCH)
