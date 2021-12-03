@@ -216,4 +216,47 @@ window.addEventListener( "load", function() {
     } );
   }
 
+  //////////////////////////////////////////////////////////// PLACE ORDER
+
+  // Access the HTML form element
+  const placeOrderForm = document.forms["place-order"];
+
+  function placeOrder() {
+
+    const sendRequest = new XMLHttpRequest();
+
+    // Bind FormData object and form element
+    if( localStorage.getItem( "currentUserId" ) == 0 ) {
+      alert( "Please sign in for cart and ordering functionality" );
+      return;
+    }
+    const placeOrderInfo = new URLSearchParams();
+    placeOrderInfo.append( "userId", localStorage.getItem( "currentUserId" ) );
+
+    // Set up request
+    sendRequest.open( "POST", "http://localhost:3000/app/user/new/order" );
+
+    // Send request with data
+    sendRequest.send( placeOrderInfo );
+
+    // Successful data submission
+    sendRequest.addEventListener( "load", function( event ) {
+      if( sendRequest.status == 201 ) {
+        alert( "Order placement successful" );
+      }
+    } );
+
+    // Error with data submission
+    sendRequest.addEventListener( "error", function( event ) {
+      alert( "Submission unsuccessful, please try again" );
+    } );
+
+  }
+
+  // Take over submit event of form element
+  placeOrderForm.addEventListener( "submit", function( event ) {
+    event.preventDefault();
+    placeOrder();
+  } );
+
 } );
