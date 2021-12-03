@@ -1,9 +1,3 @@
-////////////////////////////////////////////////////////////// SETUP
-
-// Id of current user signed in
-// 0 indicates no user is signed in
-var currentUserId = 0;
-
 window.addEventListener( "load", function() {
 
   //////////////////////////////////////////////////////////// CREATE ACCOUNT
@@ -11,7 +5,7 @@ window.addEventListener( "load", function() {
   // Access the HTML form element
   const createAccountForm = document.forms["create-account"];
 
-  function sendCreateAccountData() {
+  function createAccount() {
 
     const sendRequest = new XMLHttpRequest();
 
@@ -45,7 +39,7 @@ window.addEventListener( "load", function() {
   // Take over submit event of form element
   createAccountForm.addEventListener( "submit", function( event ) {
     event.preventDefault();
-    sendCreateAccountData();
+    createAccount();
   } );
 
   //////////////////////////////////////////////////////////// SIGN IN
@@ -53,7 +47,7 @@ window.addEventListener( "load", function() {
   // Access the HTML form element
   const signInForm = document.forms["sign-in"];
 
-  function sendSignInData() {
+  function signIn() {
 
     const username = signInForm.elements.username.value;
     const pass = signInForm.elements.pass.value;
@@ -70,8 +64,8 @@ window.addEventListener( "load", function() {
     sendRequest.addEventListener( "load", function( event ) {
       if( sendRequest.status === 200 ) {
         alert( "Valid username / password" );
-        currentUserId = sendRequest.response;
-        alert( "currentUserId: " + currentUserId );
+        localStorage.setItem( "currentUserId", sendRequest.response );
+        alert( "currentUserId: " + localStorage.getItem( "currentUserId" ) );
       } else if( sendRequest.status === 404 ) {
         alert( "Invalid username / password, please try again" );
       }
@@ -87,7 +81,49 @@ window.addEventListener( "load", function() {
   // Take over submit event of form element
   signInForm.addEventListener( "submit", function( event ) {
     event.preventDefault();
-    sendSignInData();
+    signIn();
   } );
+
+  //////////////////////////////////////////////////////////// ADD ITEM TO CART
+
+  // Access the HTML button element
+  const itemForms = document.getElementsByClassName( "add-to-cart" );
+
+  function addToCart( id ) {
+
+    const sendRequest = new XMLHttpRequest();
+
+    // Bind FormData object and form element
+    const addToCartInfo = new URLSearchParams( new FormData( itemForms.namedItem( id ) ) );
+    addToCartInfo.append( "userId", localStorage.getItem( "currentUserId" ) );
+    alert( addToCartInfo );
+
+    // Set up request
+    sendRequest.open( "POST", "http://localhost:3000/app/user/new/item" );
+
+    // Send request with data
+    sendRequest.send( addToCartInfo );
+
+    // Successful data submission
+    sendRequest.addEventListener( "load", function( event ) {
+      if( sendRequest.status == 201 ) {
+        alert( "Item added to cart" );
+      }
+    } );
+
+    // Error with data submission
+    sendRequest.addEventListener( "error", function( event ) {
+      alert( "Submission unsuccessful, please try again" );
+    } );
+
+  }
+
+  // Take over submit event of form element
+  for( let i = 0; i < itemForms.length; i++ ) {
+    itemForms.item(i).addEventListener( "submit", function( event ) {
+      event.preventDefault();
+      addToCart( itemForms.item(i).id );
+    } );
+  }
 
 } );
