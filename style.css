@@ -1,0 +1,21 @@
+* {
+  font-family: monospace;
+  text-align: center;
+}
+
+.navigation {
+  margin: 3em 0;
+}
+
+a {
+  color: black;
+}
+
+label, input {
+  display: block;
+  margin: auto;
+}
+
+h1 {
+  margin-top: 2em;
+}

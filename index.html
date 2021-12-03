@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <title>Forms</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="forms.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+  <h1>Create account</h1>
+  <form id="create-account">
+    <label for="username">Username:</label>
+    <br>
+    <input id="username" name="username" value="" required>
+    <br>
+    <label for="pass">Password:</label>
+    <br>
+    <input type="password" id="pass" name="pass" value="" required>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+  
+  <h1>Sign in</h1>
+  <form id="sign-in">
+    <label for="username">Username:</label>
+    <br>
+    <input id="username" name="username" value="" required>
+    <br>
+    <label for="pass">Password:</label>
+    <br>
+    <input type="password" id="pass" name="pass" value="" required>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+  
+  <h1>Update username</h1>
+  <form id="update-username">
+    <label for="username">New username:</label>
+    <br>
+    <input id="username" name="username" value="" required>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+  
+  <h1>Update password</h1>
+  <form id="update-pass">
+    <label for="pass">New password:</label>
+    <br>
+    <input type="password" id="pass" name="pass" value="" required>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+  
+  <h1>Sign out</h1>
+  <form id="sign-out">
+    <input type="submit" value="Sign out">
+  </form>
+  
+  <h1>Menu items</h1>
+  
+  <h1>Almond milk</h1>
+  <form class="add-to-cart" id="almond-milk">
+    <input type="hidden" id="itemId" name="itemId" value="1" required>
+    <br>
+    <label for="quantity">Quantity:</label>
+    <br>
+    <input type="number" id="quantity" name="quantity" value="1" min="1" max="100" required>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+
+  <h1>Apple</h1>
+  <form class="add-to-cart" id="apple">
+    <input type="hidden" id="itemId" name="itemId" value="2" required>
+    <br>
+    <label for="quantity">Quantity:</label>
+    <br>
+    <input type="number" id="quantity" name="quantity" value="1" min="1" max="100" required>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+  
+  <h1>View cart</h1>
+  <form id="view-cart">
+    <input type="submit" value="View cart">
+  </form>
+  
+  <h1>Place order</h1>
+  <form id="place-order">
+    <input type="submit" value="Place order">
+  </form>
+  
+  <h1>View orders</h1>
+  <form id="view-orders">
+    <input type="submit" value="View orders">
+  </form>
+
+  <br>
+
+</body>
+
+</html>
