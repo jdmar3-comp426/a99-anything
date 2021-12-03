@@ -162,6 +162,15 @@ window.addEventListener( "load", function() {
     updatePass();
   } );
 
+  //////////////////////////////////////////////////////////// SIGN OUT
+
+  // Take over submit event of form element
+  document.forms["sign-out"].addEventListener( "submit", function( event ) {
+    event.preventDefault();
+    localStorage.setItem( "currentUserId", 0 );
+    alert( "Sign out successful" );
+  } );
+
   //////////////////////////////////////////////////////////// ADD ITEM TO CART
 
   // Access the HTML button element
@@ -172,9 +181,12 @@ window.addEventListener( "load", function() {
     const sendRequest = new XMLHttpRequest();
 
     // Bind FormData object and form element
+    if( localStorage.getItem( "currentUserId" ) == 0 ) {
+      alert( "Please sign in for cart and ordering functionality" );
+      return;
+    }
     const addToCartInfo = new URLSearchParams( new FormData( itemForms.namedItem( id ) ) );
     addToCartInfo.append( "userId", localStorage.getItem( "currentUserId" ) );
-    alert( addToCartInfo );
 
     // Set up request
     sendRequest.open( "POST", "http://localhost:3000/app/user/new/item" );
