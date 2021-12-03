@@ -197,14 +197,18 @@ app.post( "/app/user/new/order", ( req, res ) => {
 } );
 
 // READ list of all orders for current user (HTTP method GET)
-// At endpoint /app/user/orders
-app.get( "/app/user/orders", ( req, res ) => {
+// At endpoint /app/orders/:userId
+app.get( "/app/orders/:userId", ( req, res ) => {
   const stmt = db.prepare(
-    `SELECT * FROM orderInfo
-    WHERE userId = ?`
+    `SELECT * FROM orderInfo WHERE userId = ?`
   );
-  const orders = stmt.all( req.body.userId );
-  res.status(200).send( JSON.stringify( orders, null, "\t" ) );
+  const orders = stmt.all( req.params.userId );
+  if( orders === undefined ) {
+    res.status(404);
+  } else {
+    res.status(200);
+  }
+  res.json(orders);
 } );
 
 // DELETE an order (HTTP method DELETE)

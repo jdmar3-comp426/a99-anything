@@ -302,4 +302,47 @@ window.addEventListener( "load", function() {
     placeOrder();
   } );
 
+  //////////////////////////////////////////////////////////// VIEW ORDERS
+
+  // Access the HTML form element
+  const viewOrdersForm = document.forms["view-orders"];
+
+  function viewOrders() {
+
+    const sendRequest = new XMLHttpRequest();
+
+    // Set up request
+    if( localStorage.getItem( "currentUserId" ) == 0 ) {
+      alert( "Please sign in for cart and ordering functionality" );
+      return;
+    }
+
+    // Set up request
+    sendRequest.open( "GET", "http://localhost:3000/app/orders/" + localStorage.getItem( "currentUserId" ) );
+
+    // Send request
+    sendRequest.send();
+
+    // Successful data submission
+    sendRequest.addEventListener( "load", function( event ) {
+      if( sendRequest.status === 200 ) {
+        alert( sendRequest.response );
+      } else if( sendRequest.status === 404 ) {
+        alert( "Invalid request, please try again" );
+      }
+    } );
+
+    // Error with data submission
+    sendRequest.addEventListener( "error", function( event ) {
+      alert( "Submission unsuccessful, please try again" );
+    } );
+
+  }
+
+  // Take over submit event of form element
+  viewOrdersForm.addEventListener( "submit", function( event ) {
+    event.preventDefault();
+    viewOrders();
+  } );
+
 } );
