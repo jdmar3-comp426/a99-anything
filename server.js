@@ -107,7 +107,12 @@ app.patch( "/app/update/user", ( req, res ) => {
     SET username = COALESCE( ?, username ), pass = COALESCE( ?, pass )
     WHERE userId = ?`
   );
-  const info = stmt.run( req.body.username, md5(req.body.pass), req.body.userId );
+  let info;
+  if( req.body.pass === undefined ) {
+    info = stmt.run( req.body.username, null, req.body.userId );
+  } else {
+    info = stmt.run( req.body.username, md5(req.body.pass), req.body.userId );
+  }
   res.status(200).json( { "message" : info.changes + " record updated: ID " + req.body.userId + " (200)" } );
 } );
 
