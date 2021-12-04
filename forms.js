@@ -440,6 +440,35 @@ window.addEventListener( "load", function() {
 
   }
 
+  ////////////////////////////// DELETE CART ITEM
+
+  function deleteCartItem( changeCartInfo ) {
+
+    const sendRequest = new XMLHttpRequest();
+  
+    // Set up request
+    changeCartInfo.delete( "quantity" );
+    sendRequest.open( "DELETE", "http://localhost:3000/app/user/delete/item" );
+  
+    // Send request with data
+    sendRequest.send( changeCartInfo );
+  
+    // Successful data submission
+    sendRequest.addEventListener( "load", function( event ) {
+      if( sendRequest.status == 200 ) {
+        alert( "Cart item deleted" );
+      }
+      return;
+    } );
+  
+    // Error with data submission
+    sendRequest.addEventListener( "error", function( event ) {
+      alert( "Submission unsuccessful, please try again" );
+      return;
+    } );
+
+  }
+
   ////////////////////////////// CHANGE CART
 
   // Access the HTML form element
@@ -458,10 +487,14 @@ window.addEventListener( "load", function() {
       }
     } );
 
-    if( existingCartItem === null ) {
-      addCartItem( changeCartInfo );
+    if( changeCartInfo.get( "quantity" ) == 0 ) {
+      deleteCartItem( changeCartInfo );
     } else {
-      updateCartItem( changeCartInfo );
+      if( existingCartItem === null ) {
+        addCartItem( changeCartInfo );
+      } else {
+        updateCartItem( changeCartInfo );
+      }
     }
 
   }
