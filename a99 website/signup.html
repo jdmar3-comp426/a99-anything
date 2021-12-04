@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Cafe 99</title>
+        <script src="forms.js" async></script>
         <link rel="stylesheet" href="css/main.css">
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400&amp;display=swap" rel="stylesheet">
@@ -44,7 +45,7 @@
                       </a>
                     </span>
                     <span class="navbar-item">
-                      <a class="button is-primary" href="login.html">
+                      <a class="button is-primary" id="nav-sign-in" href="login.html">
                         <span>Login</span>
                       </a>
                     </span>
@@ -62,30 +63,24 @@
             </div>
           </section>
         <div class="container is-center is-fluid">
+          <form id="create-account">
           <div class="field">
-            <label class="label">Username</label>
+            <label for="username" class="label">Username</label>
+            <br>
             <div class="control has-icons-right">
-              <input class="input" type="text" placeholder="Text input">
-              <span class="icon is-small is-left">
-                <em class="fas fa-user"></em>
-              </span>
-              <span class="icon is-small is-right">
-                <em class="fas fa-check"></em>
-              </span>
+              <input id="username" name="username" value="" required class="input" type="text" placeholder="Username">
+              <br>
             </div>
           </div>
           <div class="field">
-            <label class="label">Password</label>
+            <label for="pass" class="label">Password</label>
             <div class="control has-icons-right">
-              <input class="input" type="text" placeholder="Text input">
-              <span class="icon is-small is-left">
-                <em class="fas fa-user"></em>
-              </span>
-              <span class="icon is-small is-right">
-                <em class="fas fa-check"></em>
-              </span>
+              <input type="password" id="pass" name="pass" value="" required class="input" placeholder="Password">
+              <br>
             </div>
           </div>
+          <input class="button is-primary" type="submit" value="Submit">
+          </form>
         </div>
       </body>
 </html>

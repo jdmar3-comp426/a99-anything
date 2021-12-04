@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Menu</title>
+        <script src="forms.js" async></script>
         <link rel="stylesheet" href="css/main.css">
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400&amp;display=swap" rel="stylesheet">
@@ -12,7 +13,7 @@
     <body>
         <div class="cart">
           <div class="cart-header">
-            <h3 class="cart-heading">Cart</h3>
+            <h3 id="cart" class="cart-heading">Cart</h3>
             <h5 class="remove-all">Remove all</h5>
           </div>
           <div class="cart-content">
@@ -75,7 +76,7 @@
                     </a>
                   </span>
                   <span class="navbar-item">
-                    <a class="button is-primary" href="login.html">
+                    <a class="button is-primary" id="nav-sign-in" href="login.html">
                       <span>Login</span>
                     </a>
                   </span>
@@ -104,6 +105,18 @@
           </div>
         </nav>
       </div>
+      <h1>Search for menu items</h1>
+  <form id="search-items">
+    <input id="query" name="query" value="" required>
+    <br>
+    <input type="submit" value="Search for menu items">
+  </form>
+
+  <form id="clear-search">
+    <input type="submit" value="Clear search">
+  </form>
+
+  <h1 id = "menu">Menu items</h1>
       <div id="coffee" class="menu-body">
         <h1 class="title">Coffee</h1>
         <div id="coffee-1" class="level">

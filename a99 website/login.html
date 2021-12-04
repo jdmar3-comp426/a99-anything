@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Cafe 99</title>
+        <script src="forms.js" async></script>
         <link rel="stylesheet" href="css/main.css">
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400&amp;display=swap" rel="stylesheet">
@@ -57,30 +58,21 @@
             </div>
           </section>
         <div class="container is-center is-fluid">
+          <form id="sign-in">
           <div class="field">
-            <label class="label">Username</label>
-            <div class="control has-icons-right">
-              <input class="input" type="text" placeholder="Text input">
-              <span class="icon is-small is-left">
-                <em class="fas fa-user"></em>
-              </span>
-              <span class="icon is-small is-right">
-                <em class="fas fa-check"></em>
-              </span>
-            </div>
+            <label class="label" for="username">Username:</label>
+            <br>
+            <input class="input" type="text" placeholder="Username" id="username" name="username" value="" required>
+            <br>
           </div>
           <div class="field">
-            <label class="label">Password</label>
-            <div class="control has-icons-right">
-              <input class="input" type="text" placeholder="Text input">
-              <span class="icon is-small is-left">
-                <em class="fas fa-user"></em>
-              </span>
-              <span class="icon is-small is-right">
-                <em class="fas fa-check"></em>
-              </span>
-            </div>
+            <label class="label" for="pass">Password:</label>
+            <br>
+            <input class="input" placeholder="Password" type="password" id="pass" name="pass" value="" required>
+            <br>
+            <input class="button is-primary" type="submit" value="Submit">
           </div>
+          </form> 
         </div>
-      </body>
+    </body>
 </html>
