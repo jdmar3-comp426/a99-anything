@@ -1,20 +1,5 @@
 window.addEventListener( "load", function() {
 
-  const menuStart = document.getElementById( "menu" );
-  if( menuStart !== null ) {
-
-    if( localStorage.getItem( "menuItemsRequested" ) == 1 ) {
-      if( localStorage.getItem( "menuItemsQuery" ) === "" ) {
-        viewItems();
-      }
-    }
-    
-    if( localStorage.getItem( "cartItemsRequested" ) == 1 ) {
-      viewCart();
-    }
-
-  }
-
   //////////////////////////////////////////////////////////// CREATE ACCOUNT
 
   // Access the HTML form element
@@ -298,14 +283,18 @@ window.addEventListener( "load", function() {
   ////////////////////////////// VIEW ALL MENU ITEMS
 
   // Access the HTML form element
-  const viewItemsForm = document.forms["view-items"];
+  const clearSearchForm = document.forms["clear-search"];
 
   // Take over submit event of form element
-  if( viewItemsForm != null ) {
-    viewItemsForm.addEventListener( "submit", function( event ) {
+  if( clearSearchForm != null ) {
+    clearSearchForm.addEventListener( "submit", function( event ) {
       event.preventDefault();
       viewItems();
     } );
+  }
+
+  if( document.getElementById( "menu" ) != null ) {
+    viewItems();
   }
 
   function viewItems() {
@@ -546,15 +535,8 @@ window.addEventListener( "load", function() {
 
   ////////////////////////////// GENERATE CART ITEMS
 
-  // Access the HTML form element
-  const viewCartForm = document.forms["view-cart"];
-
-  // Take over submit event of form element
-  if( viewCartForm != null ) {
-    viewCartForm.addEventListener( "submit", function( event ) {
-      event.preventDefault();
-      viewCart();
-    } );
+  if( document.getElementById( "cart" ) != null ) {
+    viewCart();
   }
 
   function viewCart() {
@@ -570,7 +552,7 @@ window.addEventListener( "load", function() {
     }
 
     let range = document.createRange();
-    range.setStartAfter( document.getElementById( "view-orders" ) );
+    range.setStartAfter( document.getElementById( "cart" ) );
 
     let itemContainer = document.createElement( "div" );
     itemContainer.setAttribute( "id", "items" );
