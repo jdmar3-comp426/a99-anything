@@ -1,5 +1,18 @@
 window.addEventListener( "load", function() {
 
+  //////////////////////////////////////////////////////////// SETUP
+
+  signOutElement = document.getElementById( "nav-sign-out" );
+  deleteAccountElement = document.getElementById( "nav-delete-account" );
+  signInElement = document.getElementById( "nav-sign-in" );
+
+  if( localStorage.getItem( "currentUserId" ) == 0 ) {
+    if( signOutElement != null ) { signOutElement.style.display = "none"; }
+    if( deleteAccountElement != null ) { deleteAccountElement.style.display = "none"; }
+  } else {
+    if( signInElement != null ) { signInElement.style.display = "none"; }
+  }
+
   //////////////////////////////////////////////////////////// CREATE ACCOUNT
 
   // Access the HTML form element
@@ -310,9 +323,6 @@ window.addEventListener( "load", function() {
     // Successful data submission
     sendRequest.addEventListener( "load", function( event ) {
       if( sendRequest.status === 200 ) {
-        localStorage.setItem( "cartItemsRequested", 0 );
-        localStorage.setItem( "menuItemsRequested", 1 );
-        localStorage.setItem( "menuItemsQuery", "" );
         let items = JSON.parse( sendRequest.response );
         generateMenuItems( items );
       } else if( sendRequest.status === 404 ) {
@@ -355,8 +365,6 @@ window.addEventListener( "load", function() {
     // Successful data submission
     sendRequest.addEventListener( "load", function( event ) {
       if( sendRequest.status === 200 ) {
-        localStorage.setItem( "menuItemsRequested", 1 );
-        localStorage.setItem( "menuItemsQuery", query );
         let items = JSON.parse( sendRequest.response );
         generateMenuItems( items );
       } else if( sendRequest.status === 404 ) {
@@ -540,8 +548,6 @@ window.addEventListener( "load", function() {
   }
 
   function viewCart() {
-    localStorage.setItem( "menuItemsRequested", 0 );
-    localStorage.setItem( "cartItemsRequested", 1 );
     getCart( generateCartItems );
   }
 
