@@ -1,9 +1,17 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-f059dc9a6f8d3a56e377f745f24479a46679e63a5d9fe6f495e02850cd0d8118.svg)](https://classroom.github.com/online_ide?assignment_repo_id=6368810&assignment_repo_type=AssignmentRepo)
 # a99 Anything - Cafe 99 Group Clickthrough Demo
 
-COMP426 final project template repository. All your code and documentation goes here. Change this text to be a brief description of your final project. Put the name in the header above. You will change everything below to be the main technical documentation, as outlined below.
+Cafe 99 sells a wide daily selection of beverages and baked products that are available to order online via our e-commerce site. We have a philosophy of invention — an invention of new technologies, of different ingredients and flavors with passion and skill.
 
-## First steps
+The project is based on APIs for Users, Cart Items, Orders, Items. To place an order at Cafe99 online, the user must either login or create an account. Upon signing in, the user can order items from the menu, and add to cart.
+
+## First steps & Installation
+
+## User Clickthrough & Walkaround
+
+## Requirements
+
+Installation of the project requires Node.js >= v16.
 
 Other steps that you will need to take after you have cloned this repository:
 
@@ -28,10 +36,9 @@ Other steps that you will need to take after you have cloned this repository:
 | Christy Ming     | Plan Manager                       |                              |
 
 
-## Assignment instructions
+## Execution
+Run npm start and start ordering!
 
-And that is about all you need to get started.
+## License
+This project is licensed under the GNU GENERAL PUBLIC LICENSE v3.
 
-All the rest of the assignment instructions are available at: https://comp426.johndmart.in/assignments/99
-
-Good skill, and have fun with this!
