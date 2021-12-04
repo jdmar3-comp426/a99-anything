@@ -210,6 +210,81 @@ window.addEventListener( "load", function() {
     deleteAccount();
   } );
 
+  //////////////////////////////////////////////////////////// VIEW MENU ITEMS
+
+  // Access the HTML form element
+  const viewItemsForm = document.forms["view-items"];
+
+  function viewItems() {
+
+    const sendRequest = new XMLHttpRequest();
+
+    // Set up request
+    sendRequest.open( "GET", "http://localhost:3000/app/items/" );
+
+    // Send request
+    sendRequest.send();
+
+    // Successful data submission
+    sendRequest.addEventListener( "load", function( event ) {
+      if( sendRequest.status === 200 ) {
+        alert( sendRequest.response );
+      } else if( sendRequest.status === 404 ) {
+        alert( "Invalid request, please try again" );
+      }
+    } );
+
+    // Error with data submission
+    sendRequest.addEventListener( "error", function( event ) {
+      alert( "Submission unsuccessful, please try again" );
+    } );
+
+  }
+
+  // Take over submit event of form element
+  viewItemsForm.addEventListener( "submit", function( event ) {
+    event.preventDefault();
+    viewItems();
+  } );
+
+  //////////////////////////////////////////////////////////// SEARCH FOR MENU ITEMS
+
+  // Access the HTML form element
+  const searchItemsForm = document.forms["search-items"];
+
+  function searchItems() {
+
+    const sendRequest = new XMLHttpRequest();
+
+    // Set up request
+    const searchItemsInfo = new URLSearchParams( new FormData( searchItemsForm ) );
+    sendRequest.open( "GET", "http://localhost:3000/app/specify/items/" + searchItemsInfo.get( "query" ) );
+
+    // Send request
+    sendRequest.send();
+
+    // Successful data submission
+    sendRequest.addEventListener( "load", function( event ) {
+      if( sendRequest.status === 200 ) {
+        alert( sendRequest.response );
+      } else if( sendRequest.status === 404 ) {
+        alert( "Invalid request, please try again" );
+      }
+    } );
+
+    // Error with data submission
+    sendRequest.addEventListener( "error", function( event ) {
+      alert( "Submission unsuccessful, please try again" );
+    } );
+
+  }
+
+  // Take over submit event of form element
+  searchItemsForm.addEventListener( "submit", function( event ) {
+    event.preventDefault();
+    searchItems();
+  } );
+
   //////////////////////////////////////////////////////////// GET CART ITEMS
 
   function getCart( callback, ...params ) {

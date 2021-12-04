@@ -223,14 +223,24 @@ app.delete( "/app/user/delete/order", (req, res) => {
 
 //////////////////////////////////////////////////////////// API FOR ITEMS
 
+// READ all items (HTTP method GET)
+// At endpoint /app/items/
+app.get( "/app/items", ( req, res ) => {
+  const stmt = db.prepare(
+    `SELECT * FROM itemInfo`
+  );
+  const items = stmt.all();
+  res.status(200).send( items );
+} );
+
 // READ all items that match the search query (HTTP method GET)
-// At endpoint /app/item/
-app.get( "/app/item", ( req, res ) => {
+// At endpoint /app/specify/items/:query
+app.get( "/app/specify/items/:query", ( req, res ) => {
   const stmt = db.prepare(
     `SELECT * FROM itemInfo WHERE like( ?, itemName )`
   );
-  const item = stmt.all( '%' + req.body.search + '%' );
-  res.status(200).send( JSON.stringify( item, null, "\t" ) );
+  const item = stmt.all( '%' + req.params.query + '%' );
+  res.status(200).send( item );
 } );
 
 //////////////////////////////////////////////////////////// DEFAULT RESPONSE
