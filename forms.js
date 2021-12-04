@@ -1,4 +1,10 @@
 window.addEventListener( "load", function() {
+  
+  if( localStorage.getItem( "menuItemsRequested" ) == 1 ) {
+    if( localStorage.getItem( "menuItemsQuery" ) === "" ) {
+      viewItems();
+    }
+  }
 
   //////////////////////////////////////////////////////////// CREATE ACCOUNT
 
@@ -213,6 +219,51 @@ window.addEventListener( "load", function() {
 
   //////////////////////////////////////////////////////////// VIEW MENU ITEMS
 
+  ////////////////////////////// GENERATE MENU ITEMS
+
+  function generateItems( items ) {
+
+    if( document.getElementById( "items" ) !== null ) {
+      document.getElementById( "items" ).remove();
+    }
+
+    let range = document.createRange();
+    range.setStartAfter( document.getElementById( "view-orders" ) );
+
+    let itemContainer = document.createElement( "div" );
+    itemContainer.setAttribute( "id", "items" );
+
+    items.forEach( ( item ) => {
+
+      let itemName = document.createElement( "h1" );
+      itemName.innerHTML = item.itemName;
+
+      let itemForm = document.createElement( "form" );
+      itemForm.setAttribute( "class", "change-cart" );
+      let itemFormId = item.itemName.toLowerCase().replace( " ", "-" );
+      itemForm.setAttribute( "id", itemFormId );
+      itemForm.innerHTML =
+        `<input type="hidden" id="itemId" name="itemId" value="${item.itemId}" required>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" value="1" min="1" max="100" required>
+        <input type="submit" value="Submit">`;
+      
+      itemContainer.appendChild( itemName );
+      itemContainer.appendChild( itemForm );
+
+      itemForm.addEventListener( "submit", function( event ) {
+        event.preventDefault();
+        getCart( changeCart, itemFormId );
+      } );
+
+    } );
+
+    range.insertNode( itemContainer );
+
+  }
+
+  ////////////////////////////// VIEW ALL MENU ITEMS
+
   // Access the HTML form element
   const viewItemsForm = document.forms["view-items"];
 
@@ -229,7 +280,10 @@ window.addEventListener( "load", function() {
     // Successful data submission
     sendRequest.addEventListener( "load", function( event ) {
       if( sendRequest.status === 200 ) {
-        alert( sendRequest.response );
+        localStorage.setItem( "menuItemsRequested", 1 );
+        localStorage.setItem( "menuItemsQuery", "" );
+        let items = JSON.parse( sendRequest.response );
+        generateItems( items );
       } else if( sendRequest.status === 404 ) {
         alert( "Invalid request, please try again" );
       }
@@ -248,18 +302,18 @@ window.addEventListener( "load", function() {
     viewItems();
   } );
 
-  //////////////////////////////////////////////////////////// SEARCH FOR MENU ITEMS
+  ////////////////////////////// SEARCH FOR MENU ITEMS
 
   // Access the HTML form element
   const searchItemsForm = document.forms["search-items"];
 
-  function searchItems() {
+  function searchItems( query ) {
 
     const sendRequest = new XMLHttpRequest();
 
     // Set up request
     const searchItemsInfo = new URLSearchParams( new FormData( searchItemsForm ) );
-    sendRequest.open( "GET", "http://localhost:3000/app/specify/items/" + searchItemsInfo.get( "query" ) );
+    sendRequest.open( "GET", "http://localhost:3000/app/specify/items/" + query );
 
     // Send request
     sendRequest.send();
@@ -267,7 +321,10 @@ window.addEventListener( "load", function() {
     // Successful data submission
     sendRequest.addEventListener( "load", function( event ) {
       if( sendRequest.status === 200 ) {
-        alert( sendRequest.response );
+        localStorage.setItem( "menuItemsRequested", 1 );
+        localStorage.setItem( "menuItemsQuery", query );
+        let items = JSON.parse( sendRequest.response );
+        generateItems( items );
       } else if( sendRequest.status === 404 ) {
         alert( "Invalid request, please try again" );
       }
@@ -283,7 +340,8 @@ window.addEventListener( "load", function() {
   // Take over submit event of form element
   searchItemsForm.addEventListener( "submit", function( event ) {
     event.preventDefault();
-    searchItems();
+    const searchItemsInfo = new URLSearchParams( new FormData( searchItemsForm ) );
+    searchItems( searchItemsInfo.get( "query" ) );
   } );
 
   //////////////////////////////////////////////////////////// GET CART ITEMS
