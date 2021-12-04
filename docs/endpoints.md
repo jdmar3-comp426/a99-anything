@@ -1,5 +1,5 @@
 
-API functionality:
+# API functionality:
 ## Users:
 - Creates new user accounts - (unique) username, password, uses username to create account
 - Gets list of all users
