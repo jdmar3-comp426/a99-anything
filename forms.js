@@ -193,6 +193,7 @@ window.addEventListener( "load", function() {
     // Successful data submission
     sendRequest.addEventListener( "load", function( event ) {
       if( sendRequest.status == 200 ) {
+        localStorage.setItem( "currentUserId", 0 );
         alert( "Account deletion successful" );
       }
     } );
@@ -325,23 +326,23 @@ window.addEventListener( "load", function() {
 
   function addCartItem( changeCartInfo ) {
 
-    const newItemRequest = new XMLHttpRequest();
+    const sendRequest = new XMLHttpRequest();
   
     // Set up request
-    newItemRequest.open( "POST", "http://localhost:3000/app/user/new/item" );
+    sendRequest.open( "POST", "http://localhost:3000/app/user/new/item" );
   
     // Send request with data
-    newItemRequest.send( changeCartInfo );
+    sendRequest.send( changeCartInfo );
   
     // Successful data submission
-    newItemRequest.addEventListener( "load", function( event ) {
-      if( newItemRequest.status == 201 ) {
+    sendRequest.addEventListener( "load", function( event ) {
+      if( sendRequest.status == 201 ) {
         alert( "Cart item added" );
       }
     } );
   
     // Error with data submission
-    newItemRequest.addEventListener( "error", function( event ) {
+    sendRequest.addEventListener( "error", function( event ) {
       alert( "Submission unsuccessful, please try again" );
     } );
 
@@ -351,25 +352,25 @@ window.addEventListener( "load", function() {
 
   function updateCartItem( changeCartInfo ) {
 
-    const updateItemRequest = new XMLHttpRequest();
+    const sendRequest = new XMLHttpRequest();
   
     // Set up request
     changeCartInfo.set( "quantity", changeCartInfo.get( "quantity" ) );
-    updateItemRequest.open( "PATCH", "http://localhost:3000/app/user/update/item" );
+    sendRequest.open( "PATCH", "http://localhost:3000/app/user/update/item" );
   
     // Send request with data
-    updateItemRequest.send( changeCartInfo );
+    sendRequest.send( changeCartInfo );
   
     // Successful data submission
-    updateItemRequest.addEventListener( "load", function( event ) {
-      if( updateItemRequest.status == 200 ) {
+    sendRequest.addEventListener( "load", function( event ) {
+      if( sendRequest.status == 200 ) {
         alert( "Cart item updated" );
       }
       return;
     } );
   
     // Error with data submission
-    updateItemRequest.addEventListener( "error", function( event ) {
+    sendRequest.addEventListener( "error", function( event ) {
       alert( "Submission unsuccessful, please try again" );
       return;
     } );
