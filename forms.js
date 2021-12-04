@@ -75,7 +75,6 @@ window.addEventListener( "load", function() {
       if( sendRequest.status === 200 ) {
         alert( "Valid username / password" );
         localStorage.setItem( "currentUserId", JSON.parse( sendRequest.response ).userId );
-        alert( "currentUserId: " + localStorage.getItem( "currentUserId" ) );
       } else if( sendRequest.status === 404 ) {
         alert( "Invalid username / password, please try again" );
       }
@@ -186,7 +185,17 @@ window.addEventListener( "load", function() {
   // Access the HTML form element
   const deleteAccountForm = document.forms["delete-account"];
 
-  function deleteAccount() {
+  function deleteAccount( cart ) {
+
+    // Delete all cart items
+    cart.forEach( ( item ) => {
+
+      const changeCartInfo = new URLSearchParams();
+      changeCartInfo.append( "userId", localStorage.getItem( "currentUserId" ) );
+      changeCartInfo.append( "itemId", item.itemId );
+      deleteCartItem( changeCartInfo );
+
+    } );
 
     const sendRequest = new XMLHttpRequest();
 
@@ -218,7 +227,7 @@ window.addEventListener( "load", function() {
   // Take over submit event of form element
   deleteAccountForm.addEventListener( "submit", function( event ) {
     event.preventDefault();
-    deleteAccount();
+    getCart( deleteAccount );
   } );
 
   //////////////////////////////////////////////////////////// VIEW MENU ITEMS
