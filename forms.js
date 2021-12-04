@@ -171,6 +171,45 @@ window.addEventListener( "load", function() {
     alert( "Sign out successful" );
   } );
 
+  //////////////////////////////////////////////////////////// DELETE ACCOUNT
+
+  // Access the HTML form element
+  const deleteAccountForm = document.forms["delete-account"];
+
+  function deleteAccount() {
+
+    const sendRequest = new XMLHttpRequest();
+
+    // Bind FormData object and form element
+    const deleteAccountInfo = new URLSearchParams();
+    deleteAccountInfo.append( "userId", localStorage.getItem( "currentUserId" ) );
+
+    // Set up request
+    sendRequest.open( "DELETE", "http://localhost:3000/app/delete/user" );
+
+    // Send request with data
+    sendRequest.send( deleteAccountInfo );
+
+    // Successful data submission
+    sendRequest.addEventListener( "load", function( event ) {
+      if( sendRequest.status == 200 ) {
+        alert( "Account deletion successful" );
+      }
+    } );
+
+    // Error with data submission
+    sendRequest.addEventListener( "error", function( event ) {
+      alert( "Submission unsuccessful, please try again" );
+    } );
+
+  }
+
+  // Take over submit event of form element
+  deleteAccountForm.addEventListener( "submit", function( event ) {
+    event.preventDefault();
+    deleteAccount();
+  } );
+
   //////////////////////////////////////////////////////////// GET CART ITEMS
 
   function getCart( callback, ...params ) {
