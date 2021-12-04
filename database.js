@@ -71,20 +71,24 @@ if ( itemInfoExists === undefined ) {
 
   // Records for all menu items
   db.exec(
-    `INSERT INTO itemInfo ( itemName, price, prepTime, isVegetarian )
+    `INSERT INTO itemInfo ( itemName, price )
     VALUES
-    ( 'Almond milk', 1.00, 1, 1 ),
-    ( 'Apple', 1.00, 1, 1 ),
-    ( 'Apple pie', 1.00, 1, 0 ),
-    ( 'Avocado', 1.00, 1, 1 ),
-    ( 'Bagel', 1.00, 1, 0 ),
-    ( 'Blueberry', 1.00, 1, 1 ),
-    ( 'Blueberry pie', 1.00, 1, 0 ),
-    ( 'Cheese', 1.00, 1, 0 ),
-    ( 'Cheesecake', 1.00, 1, 0 ),
-    ( 'Chicken pot pie', 1.00, 1, 0 ),
-    ( 'Chocolate', 1.00, 1, 1 ),
-    ( 'Chocolate milk', 1.00, 1, 0 );`
+    ( 'Drip coffee', $3.00 ),
+    ( 'Latte', $3.50 ),
+    ( 'Cappuccino', $3.50 ),
+    ( 'Americano', $2.00 ),
+    ( 'Iced tea', 3.00 ),
+    ( 'Hot tea', 3.50 ),
+    ( 'Oolong', 3.50 ),
+    ( 'Jasmine', 3.50 ),
+    ( 'Apple pie', 3.00 ),
+    ( 'Cookie', 1.00 ),
+    ( 'Muffin', 2.00 ),
+    ( 'Cheesecake', 3.00 ),
+    ( 'Chicken pesto sandwich', 6.00 ),
+    ( 'Roast beef sandwich', 6.50 ),
+    ( 'House special sandwich', 6.00 ),
+    ( 'Panini', 6.00 );`
   );
 
   console.log( 'Created table for menu item information' );
