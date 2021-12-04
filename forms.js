@@ -5,6 +5,10 @@ window.addEventListener( "load", function() {
       viewItems();
     }
   }
+  
+  if( localStorage.getItem( "cartItemsRequested" ) == 1 ) {
+    viewCart();
+  }
 
   //////////////////////////////////////////////////////////// CREATE ACCOUNT
 
@@ -221,7 +225,7 @@ window.addEventListener( "load", function() {
 
   ////////////////////////////// GENERATE MENU ITEMS
 
-  function generateItems( items ) {
+  function generateMenuItems( items ) {
 
     if( document.getElementById( "items" ) !== null ) {
       document.getElementById( "items" ).remove();
@@ -240,7 +244,7 @@ window.addEventListener( "load", function() {
 
       let itemForm = document.createElement( "form" );
       itemForm.setAttribute( "class", "change-cart" );
-      let itemFormId = item.itemName.toLowerCase().replace( " ", "-" );
+      let itemFormId = "item" + item.itemId;
       itemForm.setAttribute( "id", itemFormId );
       itemForm.innerHTML =
         `<input type="hidden" id="itemId" name="itemId" value="${item.itemId}" required>
@@ -280,10 +284,11 @@ window.addEventListener( "load", function() {
     // Successful data submission
     sendRequest.addEventListener( "load", function( event ) {
       if( sendRequest.status === 200 ) {
+        localStorage.setItem( "cartItemsRequested", 0 );
         localStorage.setItem( "menuItemsRequested", 1 );
         localStorage.setItem( "menuItemsQuery", "" );
         let items = JSON.parse( sendRequest.response );
-        generateItems( items );
+        generateMenuItems( items );
       } else if( sendRequest.status === 404 ) {
         alert( "Invalid request, please try again" );
       }
@@ -324,7 +329,7 @@ window.addEventListener( "load", function() {
         localStorage.setItem( "menuItemsRequested", 1 );
         localStorage.setItem( "menuItemsQuery", query );
         let items = JSON.parse( sendRequest.response );
-        generateItems( items );
+        generateMenuItems( items );
       } else if( sendRequest.status === 404 ) {
         alert( "Invalid request, please try again" );
       }
@@ -471,17 +476,94 @@ window.addEventListener( "load", function() {
 
   //////////////////////////////////////////////////////////// VIEW CART ITEMS
 
+  ////////////////////////////// GENERATE CART ITEMS
+
+  function generateCartItems( items ) {
+
+    if( document.getElementById( "items" ) !== null ) {
+      document.getElementById( "items" ).remove();
+    }
+
+    let range = document.createRange();
+    range.setStartAfter( document.getElementById( "view-orders" ) );
+
+    let itemContainer = document.createElement( "div" );
+    itemContainer.setAttribute( "id", "items" );
+
+    // Cart empty
+    if( items === undefined ) {
+      return;
+    }
+
+    items.forEach( ( item ) => {
+
+      // Request item name
+      let itemName = document.createElement( "h1" );
+
+      const sendRequest = new XMLHttpRequest();
+  
+      // Set up request
+      sendRequest.open( "GET", "http://localhost:3000/app/item/" + item.itemId );
+  
+      // Send request
+      sendRequest.send();
+  
+      // Successful data submission
+      sendRequest.addEventListener( "load", function( event ) {
+
+        if( sendRequest.status === 200 ) {
+
+          itemName.innerHTML = JSON.parse( sendRequest.response ).itemName;
+
+          let itemForm = document.createElement( "form" );
+          itemForm.setAttribute( "class", "change-cart" );
+          let itemFormId = "item" + item.itemId;
+          itemForm.setAttribute( "id", itemFormId );
+          itemForm.innerHTML =
+            `<input type="hidden" id="itemId" name="itemId" value="${item.itemId}" required>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" value="${item.quantity}" min="0" max="100" required>
+            <input type="submit" value="Update">`;
+          
+          itemContainer.appendChild( itemName );
+          itemContainer.appendChild( itemForm );
+    
+          itemForm.addEventListener( "submit", function( event ) {
+            event.preventDefault();
+            getCart( changeCart, itemFormId );
+          } );
+
+        } else if( sendRequest.status === 404 ) {
+
+          alert( "Invalid request, please try again" );
+
+        }
+      } );
+  
+      // Error with data submission
+      sendRequest.addEventListener( "error", function( event ) {
+        alert( "Submission unsuccessful, please try again" );
+      } );
+
+    } );
+
+    range.insertNode( itemContainer );
+
+  }
+
   // Access the HTML form element
   const viewCartForm = document.forms["view-cart"];
 
-  function displayCart( cart ) {
-    alert( JSON.stringify( cart ) );
+  function viewCart() {
+    localStorage.setItem( "menuItemsRequested", 0 );
+    localStorage.setItem( "cartItemsRequested", 1 );
+    getCart( generateCartItems );
   }
 
   // Take over submit event of form element
   viewCartForm.addEventListener( "submit", function( event ) {
     event.preventDefault();
-    getCart( displayCart );
+    viewCart();
   } );
 
   //////////////////////////////////////////////////////////// PLACE ORDER

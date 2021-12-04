@@ -233,6 +233,16 @@ app.get( "/app/items", ( req, res ) => {
   res.status(200).send( items );
 } );
 
+// READ a single item (HTTP method GET)
+// At endpoint /app/items/
+app.get( "/app/item/:itemId", ( req, res ) => {
+  const stmt = db.prepare(
+    `SELECT * FROM itemInfo WHERE itemId = ?`
+  );
+  const item = stmt.get( req.params.itemId );
+  res.status(200).send( item );
+} );
+
 // READ all items that match the search query (HTTP method GET)
 // At endpoint /app/specify/items/:query
 app.get( "/app/specify/items/:query", ( req, res ) => {
