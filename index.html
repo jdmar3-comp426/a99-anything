@@ -61,28 +61,21 @@
     <input type="submit" value="Sign out">
   </form>
   
-  <h1>Menu items</h1>
-  
-  <h1>Almond milk</h1>
-  <form class="add-to-cart" id="almond-milk">
-    <input type="hidden" id="itemId" name="itemId" value="1" required>
-    <br>
-    <label for="quantity">Quantity:</label>
-    <br>
-    <input type="number" id="quantity" name="quantity" value="1" min="1" max="100" required>
-    <br>
-    <input type="submit" value="Submit">
+  <h1>Delete account</h1>
+  <form id="delete-account">
+    <input type="submit" value="Delete account">
   </form>
-
-  <h1>Apple</h1>
-  <form class="add-to-cart" id="apple">
-    <input type="hidden" id="itemId" name="itemId" value="2" required>
+  
+  <h1>View menu items</h1>
+  <form id="view-items">
+    <input type="submit" value="View menu items">
+  </form>
+  
+  <h1>Search for menu items</h1>
+  <form id="search-items">
+    <input id="query" name="query" value="" required>
     <br>
-    <label for="quantity">Quantity:</label>
-    <br>
-    <input type="number" id="quantity" name="quantity" value="1" min="1" max="100" required>
-    <br>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Search for menu items">
   </form>
   
   <h1>View cart</h1>
