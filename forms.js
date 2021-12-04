@@ -2,15 +2,22 @@ window.addEventListener( "load", function() {
 
   //////////////////////////////////////////////////////////// SETUP
 
-  signOutElement = document.getElementById( "nav-sign-out" );
-  deleteAccountElement = document.getElementById( "nav-delete-account" );
-  signInElement = document.getElementById( "nav-sign-in" );
+  toggleAccountView();
 
-  if( localStorage.getItem( "currentUserId" ) == 0 ) {
-    if( signOutElement != null ) { signOutElement.style.display = "none"; }
-    if( deleteAccountElement != null ) { deleteAccountElement.style.display = "none"; }
-  } else {
-    if( signInElement != null ) { signInElement.style.display = "none"; }
+  function toggleAccountView() {
+
+    if( localStorage.getItem( "currentUserId" ) == "0" ) {
+      document.getElementById( "nav-sign-in" ).style.display = "initial";
+      document.getElementById( "nav-sign-out" ).style.display = "none";
+      document.getElementById( "nav-delete-account" ).style.display = "none";
+      document.getElementById( "nav-update-account" ).style.display = "none";
+    } else {
+      document.getElementById( "nav-sign-in" ).style.display = "none";
+      document.getElementById( "nav-sign-out" ).style.display = "initial";
+      document.getElementById( "nav-delete-account" ).style.display = "initial";
+      document.getElementById( "nav-update-account" ).style.display = "initial";
+    }
+
   }
 
   //////////////////////////////////////////////////////////// CREATE ACCOUNT
@@ -88,6 +95,9 @@ window.addEventListener( "load", function() {
       if( sendRequest.status === 200 ) {
         alert( "Valid username / password" );
         localStorage.setItem( "currentUserId", JSON.parse( sendRequest.response ).userId );
+        alert( localStorage.getItem("currentUserId") );
+        toggleAccountView();
+        window.location.href = "/index.html";
       } else if( sendRequest.status === 404 ) {
         alert( "Invalid username / password, please try again" );
       }
@@ -185,7 +195,7 @@ window.addEventListener( "load", function() {
   //////////////////////////////////////////////////////////// SIGN OUT
 
   // Access the HTML form element
-  const signOutForm = document.forms["sign-out"];
+  const signOutForm = document.forms["nav-sign-out"];
 
   // Take over submit event of form element
   if( signOutForm != null ) {
@@ -193,13 +203,15 @@ window.addEventListener( "load", function() {
       event.preventDefault();
       localStorage.setItem( "currentUserId", 0 );
       alert( "Sign out successful" );
+      toggleAccountView();
+      window.location.href = "/index.html";
     } );
   }
 
   //////////////////////////////////////////////////////////// DELETE ACCOUNT
 
   // Access the HTML form element
-  const deleteAccountForm = document.forms["delete-account"];
+  const deleteAccountForm = document.forms["nav-delete-account"];
 
   // Take over submit event of form element
   if( deleteAccountForm != null ) {
