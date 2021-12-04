@@ -1,19 +1,32 @@
 window.addEventListener( "load", function() {
-  
-  if( localStorage.getItem( "menuItemsRequested" ) == 1 ) {
-    if( localStorage.getItem( "menuItemsQuery" ) === "" ) {
-      viewItems();
+
+  const menuStart = document.getElementById( "menu" );
+  if( menuStart !== null ) {
+
+    if( localStorage.getItem( "menuItemsRequested" ) == 1 ) {
+      if( localStorage.getItem( "menuItemsQuery" ) === "" ) {
+        viewItems();
+      }
     }
-  }
-  
-  if( localStorage.getItem( "cartItemsRequested" ) == 1 ) {
-    viewCart();
+    
+    if( localStorage.getItem( "cartItemsRequested" ) == 1 ) {
+      viewCart();
+    }
+
   }
 
   //////////////////////////////////////////////////////////// CREATE ACCOUNT
 
   // Access the HTML form element
   const createAccountForm = document.forms["create-account"];
+
+  // Take over submit event of form element
+  if( createAccountForm != null ) {
+    createAccountForm.addEventListener( "submit", function( event ) {
+      event.preventDefault();
+      createAccount();
+    } );
+  }
 
   function createAccount() {
 
@@ -46,16 +59,18 @@ window.addEventListener( "load", function() {
 
   }
 
-  // Take over submit event of form element
-  createAccountForm.addEventListener( "submit", function( event ) {
-    event.preventDefault();
-    createAccount();
-  } );
-
   //////////////////////////////////////////////////////////// SIGN IN
 
   // Access the HTML form element
   const signInForm = document.forms["sign-in"];
+
+  // Take over submit event of form element
+  if( signInForm != null ) {
+    signInForm.addEventListener( "submit", function( event ) {
+      event.preventDefault();
+      signIn();
+    } );
+  }
 
   function signIn() {
 
@@ -87,16 +102,18 @@ window.addEventListener( "load", function() {
 
   }
 
-  // Take over submit event of form element
-  signInForm.addEventListener( "submit", function( event ) {
-    event.preventDefault();
-    signIn();
-  } );
-
   //////////////////////////////////////////////////////////// UPDATE USERNAME
 
   // Access the HTML form element
   const updateUsernameForm = document.forms["update-username"];
+
+  // Take over submit event of form element
+  if( updateUsernameForm != null ) {
+    updateUsernameForm.addEventListener( "submit", function( event ) {
+      event.preventDefault();
+      updateUsername();
+    } );
+  }
 
   function updateUsername() {
 
@@ -126,16 +143,18 @@ window.addEventListener( "load", function() {
 
   }
 
-  // Take over submit event of form element
-  updateUsernameForm.addEventListener( "submit", function( event ) {
-    event.preventDefault();
-    updateUsername();
-  } );
-
   //////////////////////////////////////////////////////////// UPDATE PASSWORD
 
   // Access the HTML form element
   const updatePassForm = document.forms["update-pass"];
+
+  // Take over submit event of form element
+  if( updatePassForm != null ) {
+    updatePassForm.addEventListener( "submit", function( event ) {
+      event.preventDefault();
+      updatePass();
+    } );
+  }
 
   function updatePass() {
 
@@ -165,25 +184,32 @@ window.addEventListener( "load", function() {
 
   }
 
-  // Take over submit event of form element
-  updatePassForm.addEventListener( "submit", function( event ) {
-    event.preventDefault();
-    updatePass();
-  } );
-
   //////////////////////////////////////////////////////////// SIGN OUT
 
+  // Access the HTML form element
+  const signOutForm = document.forms["sign-out"];
+
   // Take over submit event of form element
-  document.forms["sign-out"].addEventListener( "submit", function( event ) {
-    event.preventDefault();
-    localStorage.setItem( "currentUserId", 0 );
-    alert( "Sign out successful" );
-  } );
+  if( signOutForm != null ) {
+    signOutForm.addEventListener( "submit", function( event ) {
+      event.preventDefault();
+      localStorage.setItem( "currentUserId", 0 );
+      alert( "Sign out successful" );
+    } );
+  }
 
   //////////////////////////////////////////////////////////// DELETE ACCOUNT
 
   // Access the HTML form element
   const deleteAccountForm = document.forms["delete-account"];
+
+  // Take over submit event of form element
+  if( deleteAccountForm != null ) {
+    deleteAccountForm.addEventListener( "submit", function( event ) {
+      event.preventDefault();
+      getCart( deleteAccount );
+    } );
+  }
 
   function deleteAccount( cart ) {
 
@@ -224,12 +250,6 @@ window.addEventListener( "load", function() {
 
   }
 
-  // Take over submit event of form element
-  deleteAccountForm.addEventListener( "submit", function( event ) {
-    event.preventDefault();
-    getCart( deleteAccount );
-  } );
-
   //////////////////////////////////////////////////////////// VIEW MENU ITEMS
 
   ////////////////////////////// GENERATE MENU ITEMS
@@ -241,7 +261,7 @@ window.addEventListener( "load", function() {
     }
 
     let range = document.createRange();
-    range.setStartAfter( document.getElementById( "view-orders" ) );
+    range.setStartAfter( document.getElementById( "menu" ) );
 
     let itemContainer = document.createElement( "div" );
     itemContainer.setAttribute( "id", "items" );
@@ -280,6 +300,14 @@ window.addEventListener( "load", function() {
   // Access the HTML form element
   const viewItemsForm = document.forms["view-items"];
 
+  // Take over submit event of form element
+  if( viewItemsForm != null ) {
+    viewItemsForm.addEventListener( "submit", function( event ) {
+      event.preventDefault();
+      viewItems();
+    } );
+  }
+
   function viewItems() {
 
     const sendRequest = new XMLHttpRequest();
@@ -310,16 +338,19 @@ window.addEventListener( "load", function() {
 
   }
 
-  // Take over submit event of form element
-  viewItemsForm.addEventListener( "submit", function( event ) {
-    event.preventDefault();
-    viewItems();
-  } );
-
   ////////////////////////////// SEARCH FOR MENU ITEMS
 
   // Access the HTML form element
   const searchItemsForm = document.forms["search-items"];
+
+  // Take over submit event of form element
+  if( searchItemsForm != null ) {
+    searchItemsForm.addEventListener( "submit", function( event ) {
+      event.preventDefault();
+      const searchItemsInfo = new URLSearchParams( new FormData( searchItemsForm ) );
+      searchItems( searchItemsInfo.get( "query" ) );
+    } );
+  }
 
   function searchItems( query ) {
 
@@ -350,13 +381,6 @@ window.addEventListener( "load", function() {
     } );
 
   }
-
-  // Take over submit event of form element
-  searchItemsForm.addEventListener( "submit", function( event ) {
-    event.preventDefault();
-    const searchItemsInfo = new URLSearchParams( new FormData( searchItemsForm ) );
-    searchItems( searchItemsInfo.get( "query" ) );
-  } );
 
   //////////////////////////////////////////////////////////// GET CART ITEMS
 
@@ -483,6 +507,16 @@ window.addEventListener( "load", function() {
   // Access the HTML form element
   const itemForms = document.getElementsByClassName( "change-cart" );
 
+  // Take over submit event of form element
+  if( itemForms !== null ) {
+    for( let i = 0; i < itemForms.length; i++ ) {
+      itemForms.item(i).addEventListener( "submit", function( event ) {
+        event.preventDefault();
+        getCart( changeCart, itemForms.item(i).id );
+      } );
+    }
+  }
+
   function changeCart( cartItems, id ) {
   
     const changeCartInfo = new URLSearchParams( new FormData( itemForms.namedItem( id ) ) );
@@ -508,17 +542,26 @@ window.addEventListener( "load", function() {
 
   }
 
-  // Take over submit event of form element
-  for( let i = 0; i < itemForms.length; i++ ) {
-    itemForms.item(i).addEventListener( "submit", function( event ) {
-      event.preventDefault();
-      getCart( changeCart, itemForms.item(i).id );
-    } );
-  }
-
   //////////////////////////////////////////////////////////// VIEW CART ITEMS
 
   ////////////////////////////// GENERATE CART ITEMS
+
+  // Access the HTML form element
+  const viewCartForm = document.forms["view-cart"];
+
+  // Take over submit event of form element
+  if( viewCartForm != null ) {
+    viewCartForm.addEventListener( "submit", function( event ) {
+      event.preventDefault();
+      viewCart();
+    } );
+  }
+
+  function viewCart() {
+    localStorage.setItem( "menuItemsRequested", 0 );
+    localStorage.setItem( "cartItemsRequested", 1 );
+    getCart( generateCartItems );
+  }
 
   function generateCartItems( items ) {
 
@@ -593,25 +636,18 @@ window.addEventListener( "load", function() {
 
   }
 
-  // Access the HTML form element
-  const viewCartForm = document.forms["view-cart"];
-
-  function viewCart() {
-    localStorage.setItem( "menuItemsRequested", 0 );
-    localStorage.setItem( "cartItemsRequested", 1 );
-    getCart( generateCartItems );
-  }
-
-  // Take over submit event of form element
-  viewCartForm.addEventListener( "submit", function( event ) {
-    event.preventDefault();
-    viewCart();
-  } );
-
   //////////////////////////////////////////////////////////// PLACE ORDER
 
   // Access the HTML form element
   const placeOrderForm = document.forms["place-order"];
+
+  // Take over submit event of form element
+  if( placeOrderForm != null ) {
+    placeOrderForm.addEventListener( "submit", function( event ) {
+      event.preventDefault();
+      placeOrder();
+    } );
+  }
 
   function placeOrder() {
 
@@ -645,16 +681,18 @@ window.addEventListener( "load", function() {
 
   }
 
-  // Take over submit event of form element
-  placeOrderForm.addEventListener( "submit", function( event ) {
-    event.preventDefault();
-    placeOrder();
-  } );
-
   //////////////////////////////////////////////////////////// VIEW ORDERS
 
   // Access the HTML form element
   const viewOrdersForm = document.forms["view-orders"];
+
+  // Take over submit event of form element
+  if( viewOrdersForm != null ) {
+    viewOrdersForm.addEventListener( "submit", function( event ) {
+      event.preventDefault();
+      viewOrders();
+    } );
+  }
 
   function viewOrders() {
 
@@ -687,11 +725,5 @@ window.addEventListener( "load", function() {
     } );
 
   }
-
-  // Take over submit event of form element
-  viewOrdersForm.addEventListener( "submit", function( event ) {
-    event.preventDefault();
-    viewOrders();
-  } );
 
 } );
