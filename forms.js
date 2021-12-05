@@ -9,12 +9,14 @@ window.addEventListener( "load", function() {
     if( localStorage.getItem( "currentUserId" ) == "0" ) {
       document.getElementById( "nav-sign-in" ).style.display = "initial";
       document.getElementById( "nav-sign-out" ).style.display = "none";
+      document.getElementById( "nav-create-account" ).style.display = "initial";
       document.getElementById( "nav-delete-account" ).style.display = "none";
       document.getElementById( "nav-update-account" ).style.display = "none";
       document.getElementById( "nav-cart" ).style.display = "none";
     } else {
       document.getElementById( "nav-sign-in" ).style.display = "none";
       document.getElementById( "nav-sign-out" ).style.display = "initial";
+      document.getElementById( "nav-create-account" ).style.display = "none";
       document.getElementById( "nav-delete-account" ).style.display = "initial";
       document.getElementById( "nav-update-account" ).style.display = "initial";
       document.getElementById( "nav-cart" ).style.display = "initial";
