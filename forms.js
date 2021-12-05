@@ -11,11 +11,13 @@ window.addEventListener( "load", function() {
       document.getElementById( "nav-sign-out" ).style.display = "none";
       document.getElementById( "nav-delete-account" ).style.display = "none";
       document.getElementById( "nav-update-account" ).style.display = "none";
+      document.getElementById( "nav-cart" ).style.display = "none";
     } else {
       document.getElementById( "nav-sign-in" ).style.display = "none";
       document.getElementById( "nav-sign-out" ).style.display = "initial";
       document.getElementById( "nav-delete-account" ).style.display = "initial";
       document.getElementById( "nav-update-account" ).style.display = "initial";
+      document.getElementById( "nav-cart" ).style.display = "initial";
     }
 
   }
