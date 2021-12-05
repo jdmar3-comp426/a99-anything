@@ -50,42 +50,43 @@
             </nav>
           </div>
         </section>
-        <div class="table is-bordered">
-        <div class="account-table">
-            <tbody>
-                <tr>
-                    <th scope="row" class="account-table-head">Username: </th>
-                    <td id="cusername">abcdefg</td>
-                </tr>
-                <tr>
-                    <th scope="row" class="account-table-head">Password: </th>
-                    <td id="cpassword">123456</td>
-                </tr>
-            </tbody>
-        </div>
-        <h1>Update username</h1>
+        <section class="hero">
+          <div class="hero-body">
+            <p class="is-size-1 has-text-centered">
+              Account
+            </p>
+          </div>
+        </section>
+        <div class="container is-center">
           <form id="update-username">
-            <label for="username">New username:</label>
-          <br>
-            <input id="username" name="username" value="" required>
+            <div class="field">
+            <label class="label" for="username">Update username:</label>
+            <input class="input" type="text" placeholder="New Username" id="username" name="username" value="" required>
            <br>
-            <input type="submit" value="Submit">
+          </div>
+            <input class="button is-primary" type="submit" value="Submit">
           </form>
-  
-         <h1>Update password</h1>
+          <br>
+        <div class="container is-center">
           <form id="update-pass">
-            <label for="pass">New password:</label>
+            <div class="field">
+            <label class="label" for="pass">Update password:</label>
+            <input class="input" type="password" placeholder="New Password" id="pass" name="pass" value="" required>
           <br>
-            <input type="password" id="pass" name="pass" value="" required>
-          <br>
-          <input type="submit" value="Submit">
-          </form>
-        <form id="nav-sign-out">
-          <input type="submit" value="Sign out">
-        </form>
-        <form id="nav-delete-account">
-          <input type="submit" value="Delete account">
-        </form>
         </div>
+          <input class="button is-primary" type="submit" value="Submit">
+          </form>
+          <br>
+        <div class="container is-center">
+          <form id="nav-sign-out">
+          <input class="button is-primary is-outlined" type="submit" value="Sign out">
+          </form>
+          
+          <form id="nav-delete-account">
+          <input class="button is-danger" type="submit" value="Delete account">
+          </form>
+        </div>
+        </div>
+      </div>
       </body>
 </html>
