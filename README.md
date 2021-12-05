@@ -48,7 +48,7 @@ YouTube Link: https://youtu.be/yOVfl7vfcIM
 - npm run server
 - npm run client
 
-## Run npm run server first, and then npm run client (Order Matters!) and start ordering!
+- Run npm run server first, and then npm run client (Order Matters!) and start ordering!
 
 ## License
 This project is licensed under the GNU GENERAL PUBLIC LICENSE v3.
