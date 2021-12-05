@@ -13,33 +13,23 @@ The project is based on APIs for Users, Cart Items, Orders, Items. To place an o
 
 1. Cookies Enabled
 
-2. localStore, which requires certain browser versions (http://diveintohtml5.info/storage.html)
+2. Installation of the project requires Node.js >= v16.
 
-3. Install dependencies
+3. localStore, which requires certain browser versions
+    Please visit this link here => (http://diveintohtml5.info/storage.html) for specific details on browser versions.
 
-4. Npm run server, and then npm run client
+4. Install dependencies (Express, MD5, Browser-Sync, Cors, and Better-sqlite3)
+    Run npm install express md5 cors browser-sync better-sqlite3
+
+5. Npm run server, and then npm run client
 
 
-
-Installation of the project requires Node.js >= v16.
-
-Other steps that you will need to take after you have cloned this repository:
-
-1. Choose and update the LICENSE file accordingly.
-2. Edit this README.md file and use it as the main location of your technical documentation with links out to information contained under `/docs/`.
-3. Create a `/docs/` directory for more elaborate documentation of your API, planning notes, etc.
-4. Make sure that all of your team members have access to the repository as administrators.
-5. Create a project under the **Projects** tab. Use this to manage your planning. Create a To-do list, etc. Explore the tools available and user them to manage your project.
-7. Assign team roles and include a listing of those roles in this README.md file or in another file under `/docs/`.
-8. Then put your entire development workflow in this repository.
-9. Use **Pull requests** to propose changes and incorporate them into your code from various team members.
-10. Use **Issues** to identify and track bugs and also to communicate about various aspects of the project.
 
 ## Team mangement & Roles
 
 | *Name*           | *Primary Management Role*          | *Other Leads*                |
 |------------------|------------------------------------|------------------------------|
-| Tejas Ravuri     | Review/Document Manager            | Database co-lead             |
+| Tejas Ravuri     | Review/Document Manager            | Front-end/Database co-lead   |
 | Ziyun Tang       | Back end, Database Lead            |                              |
 | Yixin Xu         | Design co-lead                     | Review Managment co-lead     |
 | Dedeepya Madineni| Front end, Design lead             |                              |
