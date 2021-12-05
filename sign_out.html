@@ -3,41 +3,63 @@
 <html lang="en">
 
 <head>
-  <title>Forms</title>
+  <title>Cafe 99 e-Commerce Application</title>
   <link rel="stylesheet" href="style.css">
   <script src="forms.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <h1>Navigation</h1>
-  <div><a href = "index.html">Home</a></div>
-  <div><a href = "create_account.html">Create account</a></div>
-  <div><a href = "sign_in.html" id="nav-sign-in">Sign in</a></div>
-  <form id="nav-sign-out">
-    <input type="submit" value="Sign out">
-  </form>
-  <div><a href = "update_account.html" id="nav-update-account">Update account</a></div>
-  <form id="nav-delete-account">
-    <input type="submit" value="Delete account">
-  </form>
-  <div><a href = "menu.html">Menu</a></div>
-  <div><a href = "cart.html" id="nav-cart">Cart</a></div>
-
-  <h1>Sign in</h1>
-  <form id="sign-in">
-    <label for="username">Username:</label>
-    <br>
-    <input id="username" name="username" value="" required>
-    <br>
-    <label for="pass">Password:</label>
-    <br>
-    <input type="password" id="pass" name="pass" value="" required>
-    <br>
-    <input type="submit" value="Submit">
-  </form>
+  <div class="nav">
+    <div class="container">
+      <ul>
+        <li class="title"><a href="./index.html">Cafe 99</a></li>
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="create_account.html">Create Account</a></li>
+        <li><a href="sign_in.html" id="nav-sign-in">Sign in</a></li>
+        <form id="nav-sign-out">
+          <input type="submit" value="Sign out">
+        </form>
+        <li><a href="update_account.html" id="nav-update-account">Update account</a></li>
+        <form id="nav-delete-account">
+          <input type="submit" value="Delete account">
+        </form>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="cart.html" id="nav-cart">Cart</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="body3">
+    <p class="heading">Sign in</p>
+    <form id="sign-in">
+      <label for="username">Username:</label>
+      <br>
+      <input id="username" name="username" value="" required>
+      <br>
+      <label for="pass">Password:</label>
+      <br>
+      <input type="password" id="pass" name="pass" value="" required>
+      <br>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+  <footer>
+    <ul>
+      <li class="left_footer">&copy;Team Anything. All Rights Reserved.</li>
+      <li><a href="./index.html">Home</a></li>
+      <li><a href="create_account.html">Create Account</a></li>
+      <li><a href="sign_in.html" id="nav-sign-in">Sign in</a></li>
+      <li><a href="update_account.html" id="nav-update-account">Update account</a></li>
+    </ul>
+  </footer>
 
 </body>
 
