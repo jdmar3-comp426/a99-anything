@@ -97,7 +97,6 @@ window.addEventListener( "load", function() {
       if( sendRequest.status === 200 ) {
         alert( "Valid username / password" );
         localStorage.setItem( "currentUserId", JSON.parse( sendRequest.response ).userId );
-        alert( localStorage.getItem("currentUserId") );
         toggleAccountView();
         window.location.href = "/index.html";
       } else if( sendRequest.status === 404 ) {
@@ -499,9 +498,6 @@ window.addEventListener( "load", function() {
   
     // Successful data submission
     sendRequest.addEventListener( "load", function( event ) {
-      if( sendRequest.status == 200 ) {
-        alert( "Cart item deleted" );
-      }
       return;
     } );
   
