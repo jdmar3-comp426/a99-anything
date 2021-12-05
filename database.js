@@ -25,7 +25,7 @@ let userInfoExists = db.prepare(
 if ( userInfoExists === undefined ) {
 
   console.log( 'Did not find table for user information, will create' );
-  
+
   // Create table for user information
   db.exec(
     `CREATE TABLE userInfo (
@@ -57,7 +57,7 @@ let itemInfoExists = db.prepare(
 if ( itemInfoExists === undefined ) {
 
   console.log( 'Did not find table for menu item information, will create' );
-  
+
   // Create table for menu item information
   db.exec(
     `CREATE TABLE itemInfo (
@@ -67,26 +67,26 @@ if ( itemInfoExists === undefined ) {
     );`
   );
 
-  // Records for all menu items
+    // Records for all menu items
   db.exec(
     `INSERT INTO itemInfo ( itemName, price )
     VALUES
-    ( 'Drip coffee', 3.00 ),
-    ( 'Latte', 3.50 ),
-    ( 'Cappuccino', 3.50 ),
-    ( 'Americano', 2.00 ),
+    ( 'Drip coffee', 3.05 ),
+    ( 'Latte', 3.49 ),
+    ( 'Cappuccino', 3.75 ),
+    ( 'Americano', 2.49 ),
     ( 'Iced tea', 3.00 ),
-    ( 'Hot tea', 3.50 ),
-    ( 'Oolong', 3.50 ),
-    ( 'Jasmine', 3.50 ),
+    ( 'Hot tea', 3.49 ),
+    ( 'Oolong', 3.49 ),
+    ( 'Jasmine', 3.49 ),
     ( 'Apple pie', 3.00 ),
     ( 'Cookie', 1.00 ),
     ( 'Muffin', 2.00 ),
     ( 'Cheesecake', 3.00 ),
-    ( 'Chicken pesto sandwich', 6.00 ),
-    ( 'Roast beef sandwich', 6.50 ),
-    ( 'House special sandwich', 6.00 ),
-    ( 'Panini', 6.00 );`
+    ( 'Chicken pesto sandwich', 7.49 ),
+    ( 'Roast beef sandwich', 6.49 ),
+    ( 'House special sandwich', 6.49 ),
+    ( 'Panini', 6.29 );`
   );
 
   console.log( 'Created table for menu item information' );
@@ -113,7 +113,7 @@ let cartInfoExists = db.prepare(
 if ( cartInfoExists === undefined ) {
 
   console.log( 'Did not find table for cart information, will create' );
-  
+
   // Create table for cart information
   db.exec(
     `CREATE TABLE cartInfo (
@@ -145,7 +145,7 @@ let orderInfoExists = db.prepare(
 if ( orderInfoExists === undefined ) {
 
   console.log( 'Did not find table for order information, will create' );
-  
+
   // Create table for order information
   db.exec(
     `CREATE TABLE orderInfo (
