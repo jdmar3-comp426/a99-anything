@@ -11,6 +11,16 @@ The project is based on APIs for Users, Cart Items, Orders, Items. To place an o
 
 ## Requirements
 
+1. Cookies Enabled
+
+2. localStore, which requires certain browser versions (http://diveintohtml5.info/storage.html)
+
+3. Install dependencies
+
+4. Npm run server, and then npm run client
+
+
+
 Installation of the project requires Node.js >= v16.
 
 Other steps that you will need to take after you have cloned this repository:
