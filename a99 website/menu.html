@@ -11,33 +11,45 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400&amp;display=swap" rel="stylesheet">
     </head>
     <body>
+      <div class="cart-body">
         <div class="cart">
-          <div class="cart-header">
-            <h3 id="cart" class="cart-heading">Cart</h3>
-            <h5 class="remove-all">Remove all</h5>
-          </div>
-          <div class="cart-content">
-            <div class="cart-item">
-              <h1 class="item-name">Drip Coffee</h1>
-              <div class="counter">
-                <div class="add-btn">+</div>
-                <div class="count">2</div>
-                <div class="sub-btn">-</div>
+            <div class="cart-content">
+                <div class="cart-item">
+                    <div class="item-name">
+                      <h1>Drip Coffee</h1>
+                      <div class ="remove-item close-btn">
+                        <em class="fa fa-close"></em>
+                      </div>
+                      <div class="product_rate_info">
+                        <h1 class="item-price">$3.00</h1>
+                        <span class="sub-btn">-</span>
+                        <span class="count">1</span>
+                        <span class="add-btn">+</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cart-item">
+                    <div class="item-name">
+                      <h1>Iced Tea</h1>
+                      <div class="remove-item close-btn">
+                        <em class="fa fa-close"></em>
+                      </div>
+                      <div class="product_rate_info">
+                        <h1 class="item-price">$3.00</h1>
+                        <span class="sub-btn">-</span>
+                        <span class="count">1</span>
+                        <span class="add-btn">+</span>
+                      </div>
+                    </div>
+                  </div>
               </div>
-              <div class="prices">
-                <div class="item-price">$3.00</div>
-                <div class="remove-item"><u>Remove</u></div>
+              <hr /> 
+              <div class="checkout">
+                <div class="total">
+                    <p class="total-text">Total</p>
+                    <h4 class="total-amount">$3.00</h4>
+                <button class="button is-dark">Checkout</button>
               </div>
-            </div>
-            <hr> 
-            <div class="checkout">
-              <div class="total">
-                <div>
-                  <div class="total-text">Total</div>
-                </div>
-              <div class="total-amount">$3.00</div>
-              </div>
-              <button class="button is-dark">Checkout</button>
             </div>
           </div>
         </div>
@@ -105,110 +117,224 @@
           </div>
         </nav>
       </div>
-      <h1>Search for menu items</h1>
-  <form id="search-items">
-    <input id="query" name="query" value="" required>
-    <br>
-    <input type="submit" value="Search for menu items">
-  </form>
-
-  <form id="clear-search">
-    <input type="submit" value="Clear search">
-  </form>
-
-  <h1 id = "menu">Menu items</h1>
-      <div id="coffee" class="menu-body">
+      <form id="search-items" class="field has-addons">
+        <div class="control">
+          <input id="query" name="query" value="" required class="input" type="text" placeholder="Search Menu Items">
+        </div>
+        <div class="control">
+          <input class="button is-light" type="submit" value="Search">
+        </div>
+        <div class="control" id="clear-search">
+          <input class="button is-light" type="submit" value="Clear">
+        </div>
+      </form>
+  <div id="menu" class="menu-body">
+      <div id="coffee">
         <h1 class="title">Coffee</h1>
         <div id="coffee-1" class="level">
-          <p class="level-item has-text-centered">
+          <div class="level-left">
+          <p class="level-item">
             <p class="heading">Drip Coffee  --  $3.00</p>
-            <button class="button is-dark">Add to Cart</button>
           </p>
-          <p class="level-item has-text-centered">
+        </div>
+          <br>
+          <div class="level-right">
+          <p class="level-item">
             <p class="heading">Latte  --  $3.50</p>
+          </p>
+        </div>
+        </div>
+        <div id="coffee1-add" class="level">
+          <div class="level-left">
+          <p class="level-item">
             <button class="button is-dark">Add to Cart</button>
           </p>
+          </div>
+          <div class="level-right">
+          <p class="level-item">
+            <button class="button is-dark">Add to Cart</button>
+          </p>
+          </div>
         </div>
         <div id="coffee-2" class="level">
+          <div class="level-left">
           <p class="level-item has-text-centered">
             <p class="heading">Capuccino  --  $3.50</p>
-            <button class="button is-dark">Add to Cart</button>
           </p>
+          </div>
+          <div class="level-right">
           <p class="level-item has-text-centered">
             <p class="heading">Americano  --  $2.00</p>
-            <button class="button is-dark">Add to Cart</button>
           </p>
         </div>
+        </div>
+        <div id="coffee2-add" class="level">
+          <div class="level-left">
+          <p class="level-item has-text-centered">
+            <button class="button is-dark">Add to Cart</button>
+          </p>
+          </div>
+          <div class="level-right">
+          <p class="level-item has-text-centered">
+            <button class="button is-dark">Add to Cart</button>
+          </p>
+          </div>
       </div>
-      <div id="tea" class="menu-body">
+      </div>
+      <div id="tea">
         <h1 class="title">Tea</h1>
         <div id="tea-1" class="level">
-          <p class="level-item has-text-centered">
+          <div class="level-left">
+          <p class="level-item has-text-right">
             <p class="heading">Iced Tea  --  $3.00</p>
-            <button class="button is-dark">Add to Cart</button>
           </p>
-          <p class="level-item has-text-centered">
+        </div>
+        <div class="level-right">
+          <p class="level-item">
             <p class="heading">Hot Tea  --  $3.50</p>
+          </p>
+        </div>
+        </div>
+        <div id="tea1-add" class="level">
+          <div class="level-left">
+          <p class="level-item">
             <button class="button is-dark">Add to Cart</button>
           </p>
+        </div>
+        <div class="level-right">
+          <p class="level-item has-text-centered">
+            <button class="button is-dark">Add to Cart</button>
+          </p>
+        </div>
         </div>
         <div id="tea-2" class="level">
+          <div class="level-left">
           <p class="level-item has-text-centered">
             <p class="heading">Oolong  --  $3.50</p>
-            <button class="button is-dark">Add to Cart</button>
           </p>
+          </div>
+          <div class="level-right">
           <p class="level-item has-text-centered">
             <p class="heading">Jasmine  --  $3.50</p>
+          </p>
+          </div>
+        </div>
+        <div id="tea2-add" class="level">
+          <div class="level-left">
+          <p class="level-item has-text-centered">
             <button class="button is-dark">Add to Cart</button>
           </p>
+          </div>
+          <div class="level-right">
+          <p class="level-item has-text-centered">
+            <button class="button is-dark">Add to Cart</button>
+          </p>
+          </div>
         </div>
       </div>
-      <div id="bakery" class="menu-body">
+      <div id="bakery">
         <h1 class="title">Bakery</h1>
         <div id="bakery-1" class="level">
+          <div class="level-left">
           <p class="level-item has-text-centered">
             <p class="heading">Apple Pie  --  $3.00</p>
-            <button class="button is-dark">Add to Cart</button>
           </p>
+          </div>
+          <div class="level-right">
           <p class="level-item has-text-centered">
             <p class="heading">Cookie  --  $1.00</p>
+          </p>
+          </div>
+        </div>
+        <div id="bakery1-add" class="level">
+          <div class="level-left">
+          <p class="level-item has-text-centered">
             <button class="button is-dark">Add to Cart</button>
           </p>
+        </div>
+          <div class="level-right">
+          <p class="level-item has-text-centered">
+            <button class="button is-dark">Add to Cart</button>
+          </p>
+          </div>
         </div>
         <div id="bakery-2" class="level">
+          <div class="level-left">
           <p class="level-item has-text-centered">
             <p class="heading">Muffin  --  $2.00</p>
-            <button class="button is-dark">Add to Cart</button>
           </p>
+          </div>
+          <div class="level-right">
           <p class="level-item has-text-centered">
             <p class="heading">Cheesecake  --  $3.00</p>
+          </p>
+          </div>
+        </div>
+        <div id="bakery2-add" class="level">
+          <div class="level-left">
+          <p class="level-item has-text-centered">
             <button class="button is-dark">Add to Cart</button>
           </p>
+          </div>
+          <div class="level-right">
+          <p class="level-item has-text-centered">
+            <button class="button is-dark">Add to Cart</button>
+          </p>
+          </div>
         </div>
       </div>
-      <div id="deli" class="menu-body">
+      <div id="deli">
         <h1 class="title">Deli</h1>
         <div id="deli-1" class="level">
+          <div class="level-left">
           <p class="level-item has-text-centered">
-            <p class="heading">Chicken Pesto Sandwich --  $6.00</p>
+            <p class="heading">Chicken Pesto --  $6.00</p>
+          </p>
+          </div>
+          <div class="level-right">
+          <p class="level-item has-text-centered">
+            <p class="heading">Roast Beef  --  $6.50</p>
+          </p>
+          </div>
+        </div>
+        <div id="deli1-add" class="level">
+          <div class="level-left">
+          <p class="level-item has-text-centered">
             <button class="button is-dark">Add to Cart</button>
           </p>
+          </div>
+          <div class="level-right">
           <p class="level-item has-text-centered">
-            <p class="heading">Roast Beef Sandwich  --  $6.50</p>
             <button class="button is-dark">Add to Cart</button>
           </p>
+          </div>
         </div>
         <div id="deli-2" class="level">
+          <div class="level-left">
           <p class="level-item has-text-centered">
-            <p class="heading">House Special Sandwich  --  $6.00</p>
-            <button class="button is-dark">Add to Cart</button>
+            <p class="heading">House Special  --  $6.00</p>
           </p>
+          </div>
+          <div class="level-right">
           <p class="level-item has-text-centered">
             <p class="heading">Panini  --  $6.00</p>
+          </p>
+          </div>
+        </div>
+        <div id="deli2-add" class="level">
+          <div class="level-left">
+          <p class="level-item has-text-centered">
             <button class="button is-dark">Add to Cart</button>
           </p>
+          </div>
+          <div class="level-right">
+          <p class="level-item has-text-centered">
+            <button class="button is-dark">Add to Cart</button>
+          </p>
+          </div>
         </div>
       </div>
     </div>
+  </div>
     </body>
 </html>
