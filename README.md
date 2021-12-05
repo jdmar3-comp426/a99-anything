@@ -7,7 +7,7 @@ The project is based on APIs for Users, Cart Items, Orders, Items. To place an o
 
 
 ## Clickthrough & Walkaround Demo Video Link
-[![DEMO](https://img.youtube.com/vi/yOVfl7vfcIM/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_yOVfl7vfcIM)
+[![DEMO](https://img.youtube.com/vi/yOVfl7vfcIM/0.jpg)](https://www.youtube.com/watch?v=yOVfl7vfcIM)
 
 YouTube Link: https://youtu.be/yOVfl7vfcIM
 
