@@ -63,9 +63,7 @@ if ( itemInfoExists === undefined ) {
     `CREATE TABLE itemInfo (
       itemId INTEGER PRIMARY KEY,
       itemName TEXT NOT NULL UNIQUE CHECK ( itemName != '' ),
-      price REAL NOT NULL CHECK ( price > 0 ),
-      prepTime INTEGER NOT NULL CHECK ( prepTime > 0 ), /* prepTime is in minutes */
-      isVegetarian INTEGER NOT NULL CHECK ( ( isVegetarian == 0 ) OR ( isVegetarian == 1 ) )
+      price REAL NOT NULL CHECK ( price > 0 )
     );`
   );
 
@@ -73,10 +71,10 @@ if ( itemInfoExists === undefined ) {
   db.exec(
     `INSERT INTO itemInfo ( itemName, price )
     VALUES
-    ( 'Drip coffee', $3.00 ),
-    ( 'Latte', $3.50 ),
-    ( 'Cappuccino', $3.50 ),
-    ( 'Americano', $2.00 ),
+    ( 'Drip coffee', 3.00 ),
+    ( 'Latte', 3.50 ),
+    ( 'Cappuccino', 3.50 ),
+    ( 'Americano', 2.00 ),
     ( 'Iced tea', 3.00 ),
     ( 'Hot tea', 3.50 ),
     ( 'Oolong', 3.50 ),
