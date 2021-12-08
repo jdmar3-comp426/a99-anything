@@ -1,54 +1,55 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-f059dc9a6f8d3a56e377f745f24479a46679e63a5d9fe6f495e02850cd0d8118.svg)](https://classroom.github.com/online_ide?assignment_repo_id=6368810&assignment_repo_type=AssignmentRepo)
-# a99 Finally
+# a99 Anything - Cafe 99
 
-COMP426 final project template repository. All your code and documentation goes here. Change this text to be a brief description of your final project. Put the name in the header above. You will change everything below to be the main technical documentation, as outlined below.
+Cafe 99 sells a wide daily selection of beverages and baked products that are available to order online via our e-commerce site. We have a philosophy of invention — an invention of new technologies, of different ingredients and flavors with passion and skill.
 
-## First steps
+The project is based on APIs for Users, Cart Items, Orders, Items. To place an order at Cafe99 online, the user must either login or create an account. Upon signing in, the user can order items from the menu, and add to cart.
 
-Other steps that you will need to take after you have cloned this repository:
 
-1. Choose and update the LICENSE file accordingly. 
-2. Edit this README.md file and use it as the main location of your technical documentation with links out to information contained under `/docs/`.
-3. Create a `/docs/` directory for more elaborate documentation of your API, planning notes, etc.
-4. Make sure that all of your team members have access to the repository as administrators.
-5. Create a project under the **Projects** tab. Use this to manage your planning. Create a To-do list, etc. Explore the tools available and user them to manage your project.
-7. Assign team roles and include a listing of those roles in this README.md file or in another file under `/docs/`.
-8. Then put your entire development workflow in this repository.
-9. Use **Pull requests** to propose changes and incorporate them into your code from various team members. 
-10. Use **Issues** to identify and track bugs and also to communicate about various aspects of the project.
+## Clickthrough & Walkaround Demo Video Link
+[![DEMO](https://img.youtube.com/vi/yOVfl7vfcIM/0.jpg)](https://www.youtube.com/watch?v=yOVfl7vfcIM)
 
-## Team mangement
+YouTube Link: https://youtu.be/yOVfl7vfcIM
 
-Plan to meet with your team ASAP.
-Talk through identifying roles within your team.
+## Requirements to run Application
 
-Try to figure out what each of you are good at/enjoy doing and try to work out roles that incorporate that.
+1. Cookies Enabled
 
-Some basic roles you will want to consider:
+2. Installation of the project requires Node.js >= v16.
 
-1. A review manager - someone to review pull requests and merge or reject them and manage the related discussions
-2. A plan manager - someone to keep an eye on the overall plan and keep the project tab/to-do list up to date
-3. A documentation manager - someone to keep the documentation in order and identify what is missing and needs to be documented
-4. Roles for team members to take charge or different parts of the project. Possible roles:
-    1. Front end lead
-    2. Back end lead
-    3. Databse lead
-    4. Design lead
-    5. Etc.
+3. localStore, which requires certain browser versions
+    Please visit this link here => (http://diveintohtml5.info/storage.html) for specific details on browser versions.
 
-You will notice that there are more roles than people in your group.
-That is because you will all be doing a hybrid job of managing a thing while working on other things.
+4. Install dependencies (Express, MD5, Browser-Sync, Cors, and Better-sqlite3)
+    -  Run npm install express md5 cors browser-sync better-sqlite3
 
-## Check in with instructional staff
 
-Once all the groups are together, we'll assign each group to an LA to check in with as you progress through the project.
+## Dependency List
 
-We will post that so that your team can schedule a time for an initial check-in with your assigned LA. It would be a good idea also to add your LA to your repository.
+    "better-sqlite3": "^7.4.5",
+    "browser-sync": "^2.27.7",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "md5": "^2.3.0"
 
-## Assignment instructions
 
-And that is about all you need to get started.
+## Team mangement & Roles
 
-All the rest of the assignment instructions are available at: https://comp426.johndmart.in/assignments/99
+| *Name*           | *Primary Management Role*          | *Other Leads*                |
+|------------------|------------------------------------|------------------------------|
+| Tejas Ravuri     | Review/Document Manager            | Front-end/Database co-lead   |
+| Ziyun Tang       | Back end, Database Lead            | Front-end co-lead            |
+| Yixin Xu         | Design co-lead                     | Review Managment co-lead     |
+| Dedeepya Madineni| Front end, Design lead             |                              |
+| Christy Ming     | Plan Manager                       |                              |
 
-Good skill, and have fun with this!
+
+## Execution
+- npm run server
+- npm run client
+
+- Note: Run npm run server first, and then npm run client (Order Matters!) and start ordering!
+
+## License
+This project is licensed under the GNU GENERAL PUBLIC LICENSE v3.
+
