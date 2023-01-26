@@ -1,29 +1,5 @@
 window.addEventListener( "load", function() {
 
-  //////////////////////////////////////////////////////////// SETUP
-
-  toggleAccountView();
-
-  function toggleAccountView() {
-
-    if( localStorage.getItem( "currentUserId" ) == "0" ) {
-      document.getElementById( "nav-sign-in" ).style.display = "initial";
-      document.getElementById( "nav-sign-out" ).style.display = "none";
-      document.getElementById( "nav-create-account" ).style.display = "initial";
-      document.getElementById( "nav-delete-account" ).style.display = "none";
-      document.getElementById( "nav-update-account" ).style.display = "none";
-      document.getElementById( "nav-cart" ).style.display = "none";
-    } else {
-      document.getElementById( "nav-sign-in" ).style.display = "none";
-      document.getElementById( "nav-sign-out" ).style.display = "initial";
-      document.getElementById( "nav-create-account" ).style.display = "none";
-      document.getElementById( "nav-delete-account" ).style.display = "initial";
-      document.getElementById( "nav-update-account" ).style.display = "initial";
-      document.getElementById( "nav-cart" ).style.display = "initial";
-    }
-
-  }
-
   //////////////////////////////////////////////////////////// CREATE ACCOUNT
 
   // Access the HTML form element
@@ -99,7 +75,7 @@ window.addEventListener( "load", function() {
       if( sendRequest.status === 200 ) {
         alert( "Valid username / password" );
         localStorage.setItem( "currentUserId", JSON.parse( sendRequest.response ).userId );
-        toggleAccountView();
+        location.reload();
         window.location.href = "/index.html";
       } else if( sendRequest.status === 404 ) {
         alert( "Invalid username / password, please try again" );
@@ -206,7 +182,7 @@ window.addEventListener( "load", function() {
       event.preventDefault();
       localStorage.setItem( "currentUserId", 0 );
       alert( "Sign out successful" );
-      toggleAccountView();
+      location.reload();
       window.location.href = "/index.html";
     } );
   }
@@ -305,6 +281,7 @@ window.addEventListener( "load", function() {
     } );
 
     range.insertNode( itemContainer );
+    document.documentElement.removeAttribute("class", "hidden");
 
   }
 
@@ -633,6 +610,7 @@ window.addEventListener( "load", function() {
     } );
 
     range.insertNode( itemContainer );
+    document.documentElement.removeAttribute("class", "hidden");
 
   }
 

@@ -4,20 +4,25 @@
 
 <head>
   <title>Cafe 99 e-Commerce Application</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="forms.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .hidden {visibility: hidden;}
+  </style>
+  <link rel="shortcut icon" href="Cafe99-logos.jpeg" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@1,300&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
-  <link rel="shortcut icon" href="Cafe99-logos.jpeg" />
+  <link rel="stylesheet" href="style.css">
+  <script src="forms.js"></script>
 </head>
 
 <body>
-
+  <script type="text/javascript">
+    document.documentElement.setAttribute("class", "hidden");
+  </script>
   <div class="nav">
     <div class="container">
       <ul>
@@ -57,12 +62,24 @@
       <input type="submit" value="Submit">
     </form>
   </div>
-  <footer>
-    <ul>
-      <li class="left_footer">&copy;Team Anything. All Rights Reserved.</li>
-    </ul>
-  </footer>
-
+  <script type="text/javascript">
+    if( localStorage.getItem( "currentUserId" ) == "0" ) {
+      document.getElementById( "nav-sign-in" ).style.display = "initial";
+      document.getElementById( "nav-sign-out" ).style.display = "none";
+      document.getElementById( "nav-create-account" ).style.display = "initial";
+      document.getElementById( "nav-delete-account" ).style.display = "none";
+      document.getElementById( "nav-update-account" ).style.display = "none";
+      document.getElementById( "nav-cart" ).style.display = "none";
+    } else {
+      document.getElementById( "nav-sign-in" ).style.display = "none";
+      document.getElementById( "nav-sign-out" ).style.display = "initial";
+      document.getElementById( "nav-create-account" ).style.display = "none";
+      document.getElementById( "nav-delete-account" ).style.display = "initial";
+      document.getElementById( "nav-update-account" ).style.display = "initial";
+      document.getElementById( "nav-cart" ).style.display = "initial";
+    }
+    document.documentElement.removeAttribute("class", "hidden");
+  </script>
 </body>
 
 </html>
