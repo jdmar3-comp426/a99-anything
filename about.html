@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Cafe 99 e-Commerce Application</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .hidden {visibility: hidden;}
+  </style>
+  <link rel="shortcut icon" href="Cafe99-logos.jpeg" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="forms.js"></script>
+</head>
+
+<body>
+  <script type="text/javascript">
+    document.documentElement.setAttribute("class", "hidden");
+  </script>
+  <div class="nav">
+    <div class="container">
+      <ul>
+        <li class="title"><a href="./index.html">Cafe 99</a></li>
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li id="nav-create-account"><a href="create_account.html">Create Account</a></li>
+        <li id="nav-sign-in"><a href="sign_in.html">Sign in</a></li>
+        <form id="nav-sign-out">
+          <input type="submit" value="Sign out">
+        </form>
+        <li><a href="update_account.html" id="nav-update-account">Update account</a></li>
+        <form id="nav-delete-account">
+          <input type="submit" value="Delete account">
+        </form>
+        <li id="nav-cart"><a href="cart.html">Cart</a></li>
+      </ul>
+    </div>
+  </div>
+
+    <div class="headerhistory">
+        <div class="container">
+        </div>
+    </div>
+    <div class="body2">
+        <p class="heading">Our Story</p>
+        <p>
+            Cafe 99 started in 2021 as five friends searching for the perfect beverage and snack for leisure time. Cafe
+            99 now sells a daily selection of beverages and baked products both online and in-store.
+            We have a philosophy of invention — an invention of new technologies, of different ingredients and flavors
+            with passion and skill.</p>
+
+        <p>
+            We work with UNC students to build up our website and create new products. We are always looking for new
+            people to join us. If you are interested in coffee and baking, you cannot miss Cafe 99. Contact us for more
+            information. We are looking forward to meeting more friends.
+        </p>
+
+    </div>
+    <script type="text/javascript">
+      if( localStorage.getItem( "currentUserId" ) == "0" ) {
+        document.getElementById( "nav-sign-in" ).style.display = "initial";
+        document.getElementById( "nav-sign-out" ).style.display = "none";
+        document.getElementById( "nav-create-account" ).style.display = "initial";
+        document.getElementById( "nav-delete-account" ).style.display = "none";
+        document.getElementById( "nav-update-account" ).style.display = "none";
+        document.getElementById( "nav-cart" ).style.display = "none";
+      } else {
+        document.getElementById( "nav-sign-in" ).style.display = "none";
+        document.getElementById( "nav-sign-out" ).style.display = "initial";
+        document.getElementById( "nav-create-account" ).style.display = "none";
+        document.getElementById( "nav-delete-account" ).style.display = "initial";
+        document.getElementById( "nav-update-account" ).style.display = "initial";
+        document.getElementById( "nav-cart" ).style.display = "initial";
+      }
+      document.documentElement.removeAttribute("class", "hidden");
+    </script>
+</body>
+
+</html>
