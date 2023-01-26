@@ -6,8 +6,10 @@ Cafe 99 sells a wide daily selection of beverages and baked products that are av
 The project is based on APIs for Users, Cart Items, Orders, Items. To place an order at Cafe99 online, the user must either login or create an account. Upon signing in, the user can order items from the menu, and add to cart.
 
 
-## User Clickthrough & Walkaround Video Link
+## Clickthrough & Walkaround Demo Video Link
+[![DEMO](https://img.youtube.com/vi/yOVfl7vfcIM/0.jpg)](https://www.youtube.com/watch?v=yOVfl7vfcIM)
 
+YouTube Link: https://youtu.be/yOVfl7vfcIM
 
 ## Requirements to run Application
 
@@ -46,7 +48,7 @@ The project is based on APIs for Users, Cart Items, Orders, Items. To place an o
 - npm run server
 - npm run client
 
-Run npm run server first, and then npm run client (Order Matters!) and start ordering!
+- Note: Run npm run server first, and then npm run client (Order Matters!) and start ordering!
 
 ## License
 This project is licensed under the GNU GENERAL PUBLIC LICENSE v3.
